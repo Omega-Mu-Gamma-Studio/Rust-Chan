@@ -5,11 +5,11 @@ import useLessonStore from '../store/lessonStore';
 import './Home.css';
 
 const UNITS = [
-  { id: 1, title: 'Rust Basics',                   icon: '⬡', lessons: 15 },
-  { id: 2, title: 'Ownership and Borrowing',               icon: '⬡', lessons: 15 },
-  { id: 3, title: 'Types, Traits, and Patterns',                 icon: '⬡', lessons: 15 },
-  { id: 4, title: 'Collections, Closures, and Concurrency',                   icon: '⬡', lessons: 15 },
-  { id: 5, title: 'Async Rust and Final Project',       icon: '⬡', lessons: 15 },
+  { id: 1, title: 'Rust Basics',                              icon: '🔨', lessons: 15 }, // Anvil / hammer — first day at the forge
+  { id: 2, title: 'Ownership and Borrowing',                  icon: '🥢', lessons: 15 }, // Tongs — you hold something without owning the heat
+  { id: 3, title: 'Types, Traits, and Patterns',              icon: '🔖', lessons: 15 }, // Stamped rune / die-mold — traits = the mold something is cast from
+  { id: 4, title: 'Collections, Closures, and Concurrency',   icon: '⛓️', lessons: 15 }, // Chain-link + storm — collections crossed with concurrency
+  { id: 5, title: 'Async Rust and Final Project',             icon: '👑', lessons: 15 }, // Crown — ships to crates.io, her Crate Maintainer's Crown unlock
 ];
 
 const Home = () => {
@@ -128,11 +128,15 @@ const Home = () => {
                   {unlocked ? (
                     <span className="unit-card-pct">{unitPct}%</span>
                   ) : (
-                    <span className="unit-card-lock">🔒</span>
+                    <span className="unit-card-lock">⛓️</span>
                   )}
                 </div>
                 <span className="unit-card-title">{unit.title}</span>
-                <span className="unit-card-meta">{unit.lessons} lessons</span>
+                {unlocked ? (
+                  <span className="unit-card-meta">{unit.lessons} lessons</span>
+                ) : (
+                  <span className="unit-card-meta unit-card-meta--locked">Not yet. Finish the last one.</span>
+                )}
                 {unlocked && (
                   <div className="unit-card-bar-track">
                     <div className="unit-card-bar-fill" style={{ width: `${unitPct}%` }} />

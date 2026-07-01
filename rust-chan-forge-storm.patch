@@ -1,0 +1,398 @@
+diff --git a/src/components/character/RustChan.css b/src/components/character/RustChan.css
+index 51832d7..2408a0e 100644
+--- a/src/components/character/RustChan.css
++++ b/src/components/character/RustChan.css
+@@ -18,6 +18,7 @@
+ 
+ /* ── Sprite wrapper (handles bob animation) ── */
+ .rustchan-sprite-wrap {
++  position: relative;
+   width: var(--rustchan-width);
+   height: var(--rustchan-height);
+   display: flex;
+@@ -26,6 +27,26 @@
+   pointer-events: none;
+ }
+ 
++/* Light pool at her feet — pulses with her expression, sold cheap via ::after */
++.rustchan-sprite-wrap::after {
++  content: '';
++  position: absolute;
++  bottom: 4px;
++  left: 50%;
++  width: 70%;
++  height: 24px;
++  transform: translateX(-50%);
++  background: radial-gradient(ellipse at center, var(--color-primary-glow) 0%, transparent 75%);
++  border-radius: 50%;
++  animation: rustchan-light-pulse 3s ease-in-out infinite;
++  pointer-events: none;
++}
++
++@keyframes rustchan-light-pulse {
++  0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
++  50%       { opacity: 0.9; transform: translateX(-50%) scale(1.08); }
++}
++
+ /* ── Actual sprite image ── */
+ .rustchan-sprite-img {
+   width: 100%;
+@@ -49,13 +70,13 @@
+   cursor: pointer;
+   box-shadow: var(--shadow-md), 0 0 12px rgba(255,110,180,0.1);
+   text-align: left;
+-  font-family: var(--font-ui);
++  font-family: var(--font-dialogue); /* Cinzel — her voice gets its own visual register, per §4 */
+   background-color: var(--color-surface-2); /* override button default */
+   color: var(--color-text);
+ }
+ 
+ .dialogue-bubble:hover {
+-  border-color: var(--color-pink);
++  border-color: var(--color-primary);
+ }
+ 
+ .dialogue-bubble p {
+diff --git a/src/data/shopItems.js b/src/data/shopItems.js
+index 7d70931..33fc4cc 100644
+--- a/src/data/shopItems.js
++++ b/src/data/shopItems.js
+@@ -55,14 +55,14 @@ export const SHOP_ITEMS = [
+   {
+     id: 'wallpaper-steel',
+     type: 'wallpaper',
+-    name: 'Steel & Silver',
++    name: 'Iron Throne',
+     requiredLevel: 3,
+     emoji: '⚙️',
+-    accent: '#8fb8d0',
++    accent: '#5c7a94',
+     themeClass: 'theme-steel',
+     gradient: 'linear-gradient(160deg, #080c10 0%, #0d1520 55%, #111a22 100%)',
+     imageSrc: null,
+-    description: 'Compiled, metallic, precise. The machine aesthetic.',
++    description: 'Gunmetal grey, deep crimson, abyssal blue eyes. The borrow checker\'s throne.',
+   },
+   {
+     id: 'outfit-competitive-programmer',
+@@ -87,14 +87,14 @@ export const SHOP_ITEMS = [
+   {
+     id: 'wallpaper-indigo-gold',
+     type: 'wallpaper',
+-    name: 'Indigo & Gold',
++    name: 'Stormcaller',
+     requiredLevel: 5,
+     emoji: '👑',
+-    accent: '#9b6fff',
++    accent: '#5b4a8c',
+     themeClass: 'theme-indigo-gold',
+     gradient: 'linear-gradient(160deg, #08060f 0%, #130d28 55%, #1a1030 100%)',
+     imageSrc: null,
+-    description: 'Dark fantasy royalty. Deep indigo, gilded accents.',
++    description: 'Storm grey, charcoal, blazing orange lightning. The storm unleashed.',
+   },
+   {
+     id: 'outfit-Witch',
+@@ -119,14 +119,14 @@ export const SHOP_ITEMS = [
+   {
+     id: 'wallpaper-crimson',
+     type: 'wallpaper',
+-    name: 'Crimson Debug',
++    name: 'Neon Alley',
+     requiredLevel: 7,
+     emoji: '🔴',
+-    accent: '#ff4f7b',
++    accent: '#d6203f',
+     themeClass: 'theme-crimson',
+     gradient: 'linear-gradient(160deg, #0f0508 0%, #1e0810 55%, #150510 100%)',
+     imageSrc: null,
+-    description: 'Blood on the compiler floor. For the fearless.',
++    description: 'Deep crimson, black, neon orange. A rain-slicked alley at 2 a.m.',
+   },
+   {
+     id: 'outfit-military',
+@@ -151,14 +151,14 @@ export const SHOP_ITEMS = [
+   {
+     id: 'wallpaper-terminal',
+     type: 'wallpaper',
+-    name: 'Terminal Green',
++    name: 'Compiled',
+     requiredLevel: 9,
+     emoji: '💻',
+-    accent: '#4fffb0',
++    accent: '#39d97a',
+     themeClass: 'theme-terminal',
+     gradient: 'linear-gradient(160deg, #050f08 0%, #081a0e 55%, #050f08 100%)',
+     imageSrc: null,
+-    description: 'Classic hacker terminal. Green on black, forever.',
++    description: 'Cool blue, terminal green, matte black. The channel room, no warnings.',
+   },
+   {
+     id: 'outfit-legendary',
+diff --git a/src/pages/Home.css b/src/pages/Home.css
+index 18d8922..d6a89b8 100644
+--- a/src/pages/Home.css
++++ b/src/pages/Home.css
+@@ -112,15 +112,23 @@
+ 
+ .stat-bar-fill {
+   height: 100%;
+-  background: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary));
++  background: var(--gradient-temper);
++  background-size: 200% 100%;
+   border-radius: var(--radius-full);
+   transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+   box-shadow: 0 0 6px var(--color-primary-glow);
++  animation: temper-shimmer 3.5s ease-in-out infinite;
+ }
+ 
+ .stat-bar-fill--cyan {
+   background: linear-gradient(90deg, var(--color-primary), var(--color-cyan));
+   box-shadow: 0 0 6px var(--color-cyan-glow);
++  animation: none; /* only the XP/level bar "heats" — lesson progress stays a plain fill */
++}
++
++@keyframes temper-shimmer {
++  0%, 100% { background-position: 0% 50%; }
++  50%       { background-position: 100% 50%; }
+ }
+ 
+ @keyframes xp-pulse {
+@@ -234,8 +242,22 @@
+ }
+ 
+ .unit-card--locked {
+-  opacity: 0.35;
+   cursor: not-allowed;
++  filter: saturate(0.25) brightness(0.8);
++  border-color: var(--color-border);
++}
++
++.unit-card--locked::after {
++  content: '';
++  position: absolute;
++  inset: 0;
++  background: rgba(120, 115, 108, 0.16); /* cold ash overlay */
++  pointer-events: none;
++}
++
++.unit-card-meta--locked {
++  font-style: italic;
++  color: var(--color-text-faint);
+ }
+ 
+ .unit-card-head {
+diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
+index 5f2ed58..862e9f2 100644
+--- a/src/pages/Home.jsx
++++ b/src/pages/Home.jsx
+@@ -5,11 +5,11 @@ import useLessonStore from '../store/lessonStore';
+ import './Home.css';
+ 
+ const UNITS = [
+-  { id: 1, title: 'Rust Basics',                   icon: '⬡', lessons: 15 },
+-  { id: 2, title: 'Ownership and Borrowing',               icon: '⬡', lessons: 15 },
+-  { id: 3, title: 'Types, Traits, and Patterns',                 icon: '⬡', lessons: 15 },
+-  { id: 4, title: 'Collections, Closures, and Concurrency',                   icon: '⬡', lessons: 15 },
+-  { id: 5, title: 'Async Rust and Final Project',       icon: '⬡', lessons: 15 },
++  { id: 1, title: 'Rust Basics',                              icon: '🔨', lessons: 15 }, // Anvil / hammer — first day at the forge
++  { id: 2, title: 'Ownership and Borrowing',                  icon: '🥢', lessons: 15 }, // Tongs — you hold something without owning the heat
++  { id: 3, title: 'Types, Traits, and Patterns',              icon: '🔖', lessons: 15 }, // Stamped rune / die-mold — traits = the mold something is cast from
++  { id: 4, title: 'Collections, Closures, and Concurrency',   icon: '⛓️', lessons: 15 }, // Chain-link + storm — collections crossed with concurrency
++  { id: 5, title: 'Async Rust and Final Project',             icon: '👑', lessons: 15 }, // Crown — ships to crates.io, her Crate Maintainer's Crown unlock
+ ];
+ 
+ const Home = () => {
+@@ -128,11 +128,15 @@ const Home = () => {
+                   {unlocked ? (
+                     <span className="unit-card-pct">{unitPct}%</span>
+                   ) : (
+-                    <span className="unit-card-lock">🔒</span>
++                    <span className="unit-card-lock">⛓️</span>
+                   )}
+                 </div>
+                 <span className="unit-card-title">{unit.title}</span>
+-                <span className="unit-card-meta">{unit.lessons} lessons</span>
++                {unlocked ? (
++                  <span className="unit-card-meta">{unit.lessons} lessons</span>
++                ) : (
++                  <span className="unit-card-meta unit-card-meta--locked">Not yet. Finish the last one.</span>
++                )}
+                 {unlocked && (
+                   <div className="unit-card-bar-track">
+                     <div className="unit-card-bar-fill" style={{ width: `${unitPct}%` }} />
+diff --git a/src/styles/globals.css b/src/styles/globals.css
+index 8d2a71b..6909e3a 100644
+--- a/src/styles/globals.css
++++ b/src/styles/globals.css
+@@ -4,48 +4,59 @@
+    colors or spacing anywhere else.
+    ============================================ */
+ 
+-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@700;900&display=swap');
++@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@700;900&family=Cinzel:wght@600;700;900&display=swap');
+ 
+ :root {
+   /* --- Core Palette --- */
+-  --color-bg:            #07050f;
+-  --color-surface:       #0e0b1a;
+-  --color-surface-2:     #130f22;
+-  --color-surface-3:     #0b0917;
+-  --color-border:        rgba(124, 111, 255, 0.1);
+-  --color-border-accent: rgba(124, 111, 255, 0.28);
+-
+-  /* --- Rust-Chan Brand Colors (electric blue/violet) --- */
+-  --color-primary:        #7c6fff;
+-  --color-primary-light:  #a99fff;
+-  --color-primary-dark:   #5a4fd6;
+-  --color-primary-glow:   rgba(124, 111, 255, 0.22);
+-
+-  --color-cyan:           #64d2ff;
+-  --color-cyan-light:     #9de3ff;
+-  --color-cyan-glow:      rgba(100, 210, 255, 0.18);
+-
+-  --color-violet:         #b46eff;
+-  --color-violet-light:   #d4aaff;
+-  --color-violet-glow:    rgba(180, 110, 255, 0.18);
++  --color-bg:            #0c0906;   /* warm soot-black, not cold blue-black */
++  --color-surface:       #171310;   /* worked iron / charcoal */
++  --color-surface-2:     #1c1712;
++  --color-surface-3:     #14100c;
++  --color-border:        rgba(255, 106, 31, 0.10);
++  --color-border-accent: rgba(255, 106, 31, 0.28);
++
++  /* --- Rust-chan Brand Colors: Forge & Storm --- */
++  --color-primary:        #ff6a1f;   /* hot forge-orange — her marks, her warmth */
++  --color-primary-light:  #ff9a5c;
++  --color-primary-dark:   #c73f0a;   /* banked coals */
++  --color-primary-glow:   rgba(255, 106, 31, 0.22);
++
++  --color-cyan:           #4a8fb8;   /* muted steel-blue — code/method highlighting, held neutral (see §5 note below) */
++  --color-cyan-light:     #7fb8d9;
++  --color-cyan-glow:      rgba(74, 143, 184, 0.18);
++
++  --color-violet:         #5b2e8c;   /* storm-crackle purple — reserved, high-intensity states */
++  --color-violet-light:   #8f5ec2;
++  --color-violet-glow:    rgba(91, 46, 140, 0.18);
+ 
+   /* --- Semantic Colors --- */
+-  --color-success:        #4fffb0;
+-  --color-success-glow:   rgba(79, 255, 176, 0.15);
+-  --color-error:          #ff4f7b;
+-  --color-error-glow:     rgba(255, 79, 123, 0.15);
+-  --color-warning:        #ffc76e;
+-  --color-xp:             #7c6fff;
++  --color-success:        #3ddc84;   /* terminal green */
++  --color-success-glow:   rgba(61, 220, 132, 0.15);
++  --color-error:          #e6432f;   /* ember-red, not pink */
++  --color-error-glow:     rgba(230, 67, 47, 0.15);
++  --color-warning:        #d9a441;   /* temper-gold */
++  --color-xp:             #ff6a1f;
+ 
+   /* --- Text --- */
+-  --color-text:           #e8e0ff;
+-  --color-text-muted:     rgba(232, 224, 255, 0.5);
+-  --color-text-faint:     rgba(232, 224, 255, 0.25);
++  --color-text:           #f0e6d8;   /* warm parchment/bone */
++  --color-text-muted:     rgba(240, 230, 216, 0.55);
++  --color-text-faint:     rgba(240, 230, 216, 0.28);
++
++  /* --- Signature motif: temper-color gradient (real bladesmith heat-treat sequence) --- */
++  --gradient-temper: linear-gradient(
++    90deg,
++    #e8c468 0%,   /* straw */
++    #d9a441 25%,  /* gold */
++    #b8722e 50%,  /* bronze */
++    #6b3f7a 75%,  /* temper purple */
++    #3a5a8c 100%  /* temper blue */
++  );
+ 
+   /* --- Typography --- */
+   --font-ui:              'Inter', sans-serif;
+   --font-display:         'Orbitron', sans-serif;
+   --font-code:            'JetBrains Mono', monospace;
++  --font-dialogue:        'Cinzel', serif;
+ 
+   /* --- Sizing --- */
+   --sidebar-width:        280px;
+@@ -65,7 +76,7 @@
+   --shadow-sm:      0 2px 8px rgba(0,0,0,0.4);
+   --shadow-md:      0 4px 24px rgba(0,0,0,0.5);
+   --shadow-lg:      0 8px 48px rgba(0,0,0,0.7);
+-  --shadow-primary: 0 0 20px var(--color-primary-glow), 0 0 60px rgba(124,111,255,0.08);
++  --shadow-primary: 0 0 20px var(--color-primary-glow), 0 0 60px rgba(255,106,31,0.08);
+   --shadow-glow:    0 0 30px var(--color-primary-glow);
+ 
+   /* --- Transitions --- */
+@@ -78,43 +89,44 @@
+ /* ============================================
+    THEME OVERRIDES (shop-unlockable)
+    ============================================ */
++/* "Iron Throne" — gunmetal grey, deep crimson, charcoal, abyssal blue eyes */
+ .theme-steel {
+-  --color-primary:        #8fb8d0;
+-  --color-primary-light:  #b8d4e8;
+-  --color-primary-dark:   #6090aa;
+-  --color-primary-glow:   rgba(143, 184, 208, 0.22);
+-  --color-border-accent:  rgba(143, 184, 208, 0.28);
+-  --color-xp:             #8fb8d0;
++  --color-primary:        #5c7a94;
++  --color-primary-light:  #8aa8c2;
++  --color-primary-dark:   #3d5468;
++  --color-primary-glow:   rgba(92, 122, 148, 0.22);
++  --color-border-accent:  rgba(92, 122, 148, 0.28);
++  --color-xp:             #b03a3a;  /* deep crimson XP fill — the throne's other color */
+ }
+ 
++/* "Stormcaller" — storm grey, charcoal, blazing orange lightning */
+ .theme-indigo-gold {
+-  --color-primary:        #9b6fff;
+-  --color-primary-light:  #c4a0ff;
+-  --color-primary-dark:   #7044dd;
+-  --color-primary-glow:   rgba(155, 111, 255, 0.22);
+-  --color-border-accent:  rgba(155, 111, 255, 0.28);
+-  --color-xp:             #ffd700;
+-  --color-cyan:           #ffd700;
+-  --color-cyan-light:     #ffe566;
++  --color-primary:        #5b4a8c;
++  --color-primary-light:  #8f7ac2;
++  --color-primary-dark:   #3d2f66;
++  --color-primary-glow:   rgba(91, 74, 140, 0.22);
++  --color-border-accent:  rgba(255, 140, 40, 0.30); /* lightning-orange edge on a storm-purple base */
++  --color-xp:             #ff8c28; /* blazing orange lightning */
+ }
+ 
++/* "Neon Alley" — deep crimson, black, neon orange, rain-slicked alley */
+ .theme-crimson {
+-  --color-primary:        #ff4f7b;
+-  --color-primary-light:  #ff8fa8;
+-  --color-primary-dark:   #cc2255;
+-  --color-primary-glow:   rgba(255, 79, 123, 0.22);
+-  --color-border-accent:  rgba(255, 79, 123, 0.28);
+-  --color-xp:             #ff4f7b;
++  --color-primary:        #d6203f;  /* true crimson, less pink than before */
++  --color-primary-light:  #ff5c72;
++  --color-primary-dark:   #99101f;
++  --color-primary-glow:   rgba(214, 32, 63, 0.22);
++  --color-border-accent:  rgba(255, 122, 30, 0.30); /* neon-sign orange */
++  --color-xp:             #d6203f;
+ }
+ 
++/* "Compiled" — cool blue, terminal green, matte black */
+ .theme-terminal {
+-  --color-primary:        #4fffb0;
+-  --color-primary-light:  #9fffd8;
+-  --color-primary-dark:   #2acc80;
+-  --color-primary-glow:   rgba(79, 255, 176, 0.22);
+-  --color-border-accent:  rgba(79, 255, 176, 0.28);
+-  --color-xp:             #4fffb0;
+-  --color-cyan:           #4fffb0;
++  --color-primary:        #39d97a;  /* more phosphor-CRT than the old mint */
++  --color-primary-light:  #7dffb0;
++  --color-primary-dark:   #1f9c52;
++  --color-primary-glow:   rgba(57, 217, 122, 0.22);
++  --color-border-accent:  rgba(60, 140, 220, 0.28); /* the "cool blue" half of the Channel Room */
++  --color-xp:             #39d97a;
+ }
+ 
+ /* ============================================

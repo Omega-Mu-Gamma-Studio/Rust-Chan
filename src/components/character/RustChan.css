@@ -18,12 +18,33 @@
 
 /* ── Sprite wrapper (handles bob animation) ── */
 .rustchan-sprite-wrap {
+  position: relative;
   width: var(--rustchan-width);
   height: var(--rustchan-height);
   display: flex;
   align-items: flex-end;
   justify-content: center;
   pointer-events: none;
+}
+
+/* Light pool at her feet — pulses with her expression, sold cheap via ::after */
+.rustchan-sprite-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  width: 70%;
+  height: 24px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at center, var(--color-primary-glow) 0%, transparent 75%);
+  border-radius: 50%;
+  animation: rustchan-light-pulse 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes rustchan-light-pulse {
+  0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+  50%       { opacity: 0.9; transform: translateX(-50%) scale(1.08); }
 }
 
 /* ── Actual sprite image ── */
@@ -49,13 +70,13 @@
   cursor: pointer;
   box-shadow: var(--shadow-md), 0 0 12px rgba(255,110,180,0.1);
   text-align: left;
-  font-family: var(--font-ui);
+  font-family: var(--font-dialogue); /* Cinzel — her voice gets its own visual register, per §4 */
   background-color: var(--color-surface-2); /* override button default */
   color: var(--color-text);
 }
 
 .dialogue-bubble:hover {
-  border-color: var(--color-pink);
+  border-color: var(--color-primary);
 }
 
 .dialogue-bubble p {

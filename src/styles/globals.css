@@ -4,48 +4,59 @@
    colors or spacing anywhere else.
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@700;900&family=Cinzel:wght@600;700;900&display=swap');
 
 :root {
   /* --- Core Palette --- */
-  --color-bg:            #07050f;
-  --color-surface:       #0e0b1a;
-  --color-surface-2:     #130f22;
-  --color-surface-3:     #0b0917;
-  --color-border:        rgba(124, 111, 255, 0.1);
-  --color-border-accent: rgba(124, 111, 255, 0.28);
+  --color-bg:            #0c0906;   /* warm soot-black, not cold blue-black */
+  --color-surface:       #171310;   /* worked iron / charcoal */
+  --color-surface-2:     #1c1712;
+  --color-surface-3:     #14100c;
+  --color-border:        rgba(255, 106, 31, 0.10);
+  --color-border-accent: rgba(255, 106, 31, 0.28);
 
-  /* --- Rust-Chan Brand Colors (electric blue/violet) --- */
-  --color-primary:        #7c6fff;
-  --color-primary-light:  #a99fff;
-  --color-primary-dark:   #5a4fd6;
-  --color-primary-glow:   rgba(124, 111, 255, 0.22);
+  /* --- Rust-chan Brand Colors: Forge & Storm --- */
+  --color-primary:        #ff6a1f;   /* hot forge-orange — her marks, her warmth */
+  --color-primary-light:  #ff9a5c;
+  --color-primary-dark:   #c73f0a;   /* banked coals */
+  --color-primary-glow:   rgba(255, 106, 31, 0.22);
 
-  --color-cyan:           #64d2ff;
-  --color-cyan-light:     #9de3ff;
-  --color-cyan-glow:      rgba(100, 210, 255, 0.18);
+  --color-cyan:           #4a8fb8;   /* muted steel-blue — code/method highlighting, held neutral (see §5 note below) */
+  --color-cyan-light:     #7fb8d9;
+  --color-cyan-glow:      rgba(74, 143, 184, 0.18);
 
-  --color-violet:         #b46eff;
-  --color-violet-light:   #d4aaff;
-  --color-violet-glow:    rgba(180, 110, 255, 0.18);
+  --color-violet:         #5b2e8c;   /* storm-crackle purple — reserved, high-intensity states */
+  --color-violet-light:   #8f5ec2;
+  --color-violet-glow:    rgba(91, 46, 140, 0.18);
 
   /* --- Semantic Colors --- */
-  --color-success:        #4fffb0;
-  --color-success-glow:   rgba(79, 255, 176, 0.15);
-  --color-error:          #ff4f7b;
-  --color-error-glow:     rgba(255, 79, 123, 0.15);
-  --color-warning:        #ffc76e;
-  --color-xp:             #7c6fff;
+  --color-success:        #3ddc84;   /* terminal green */
+  --color-success-glow:   rgba(61, 220, 132, 0.15);
+  --color-error:          #e6432f;   /* ember-red, not pink */
+  --color-error-glow:     rgba(230, 67, 47, 0.15);
+  --color-warning:        #d9a441;   /* temper-gold */
+  --color-xp:             #ff6a1f;
 
   /* --- Text --- */
-  --color-text:           #e8e0ff;
-  --color-text-muted:     rgba(232, 224, 255, 0.5);
-  --color-text-faint:     rgba(232, 224, 255, 0.25);
+  --color-text:           #f0e6d8;   /* warm parchment/bone */
+  --color-text-muted:     rgba(240, 230, 216, 0.55);
+  --color-text-faint:     rgba(240, 230, 216, 0.28);
+
+  /* --- Signature motif: temper-color gradient (real bladesmith heat-treat sequence) --- */
+  --gradient-temper: linear-gradient(
+    90deg,
+    #e8c468 0%,   /* straw */
+    #d9a441 25%,  /* gold */
+    #b8722e 50%,  /* bronze */
+    #6b3f7a 75%,  /* temper purple */
+    #3a5a8c 100%  /* temper blue */
+  );
 
   /* --- Typography --- */
   --font-ui:              'Inter', sans-serif;
   --font-display:         'Orbitron', sans-serif;
   --font-code:            'JetBrains Mono', monospace;
+  --font-dialogue:        'Cinzel', serif;
 
   /* --- Sizing --- */
   --sidebar-width:        280px;
@@ -65,7 +76,7 @@
   --shadow-sm:      0 2px 8px rgba(0,0,0,0.4);
   --shadow-md:      0 4px 24px rgba(0,0,0,0.5);
   --shadow-lg:      0 8px 48px rgba(0,0,0,0.7);
-  --shadow-primary: 0 0 20px var(--color-primary-glow), 0 0 60px rgba(124,111,255,0.08);
+  --shadow-primary: 0 0 20px var(--color-primary-glow), 0 0 60px rgba(255,106,31,0.08);
   --shadow-glow:    0 0 30px var(--color-primary-glow);
 
   /* --- Transitions --- */
@@ -78,43 +89,44 @@
 /* ============================================
    THEME OVERRIDES (shop-unlockable)
    ============================================ */
+/* "Iron Throne" — gunmetal grey, deep crimson, charcoal, abyssal blue eyes */
 .theme-steel {
-  --color-primary:        #8fb8d0;
-  --color-primary-light:  #b8d4e8;
-  --color-primary-dark:   #6090aa;
-  --color-primary-glow:   rgba(143, 184, 208, 0.22);
-  --color-border-accent:  rgba(143, 184, 208, 0.28);
-  --color-xp:             #8fb8d0;
+  --color-primary:        #5c7a94;
+  --color-primary-light:  #8aa8c2;
+  --color-primary-dark:   #3d5468;
+  --color-primary-glow:   rgba(92, 122, 148, 0.22);
+  --color-border-accent:  rgba(92, 122, 148, 0.28);
+  --color-xp:             #b03a3a;  /* deep crimson XP fill — the throne's other color */
 }
 
+/* "Stormcaller" — storm grey, charcoal, blazing orange lightning */
 .theme-indigo-gold {
-  --color-primary:        #9b6fff;
-  --color-primary-light:  #c4a0ff;
-  --color-primary-dark:   #7044dd;
-  --color-primary-glow:   rgba(155, 111, 255, 0.22);
-  --color-border-accent:  rgba(155, 111, 255, 0.28);
-  --color-xp:             #ffd700;
-  --color-cyan:           #ffd700;
-  --color-cyan-light:     #ffe566;
+  --color-primary:        #5b4a8c;
+  --color-primary-light:  #8f7ac2;
+  --color-primary-dark:   #3d2f66;
+  --color-primary-glow:   rgba(91, 74, 140, 0.22);
+  --color-border-accent:  rgba(255, 140, 40, 0.30); /* lightning-orange edge on a storm-purple base */
+  --color-xp:             #ff8c28; /* blazing orange lightning */
 }
 
+/* "Neon Alley" — deep crimson, black, neon orange, rain-slicked alley */
 .theme-crimson {
-  --color-primary:        #ff4f7b;
-  --color-primary-light:  #ff8fa8;
-  --color-primary-dark:   #cc2255;
-  --color-primary-glow:   rgba(255, 79, 123, 0.22);
-  --color-border-accent:  rgba(255, 79, 123, 0.28);
-  --color-xp:             #ff4f7b;
+  --color-primary:        #d6203f;  /* true crimson, less pink than before */
+  --color-primary-light:  #ff5c72;
+  --color-primary-dark:   #99101f;
+  --color-primary-glow:   rgba(214, 32, 63, 0.22);
+  --color-border-accent:  rgba(255, 122, 30, 0.30); /* neon-sign orange */
+  --color-xp:             #d6203f;
 }
 
+/* "Compiled" — cool blue, terminal green, matte black */
 .theme-terminal {
-  --color-primary:        #4fffb0;
-  --color-primary-light:  #9fffd8;
-  --color-primary-dark:   #2acc80;
-  --color-primary-glow:   rgba(79, 255, 176, 0.22);
-  --color-border-accent:  rgba(79, 255, 176, 0.28);
-  --color-xp:             #4fffb0;
-  --color-cyan:           #4fffb0;
+  --color-primary:        #39d97a;  /* more phosphor-CRT than the old mint */
+  --color-primary-light:  #7dffb0;
+  --color-primary-dark:   #1f9c52;
+  --color-primary-glow:   rgba(57, 217, 122, 0.22);
+  --color-border-accent:  rgba(60, 140, 220, 0.28); /* the "cool blue" half of the Channel Room */
+  --color-xp:             #39d97a;
 }
 
 /* ============================================
