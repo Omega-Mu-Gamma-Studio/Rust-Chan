@@ -1,4 +1,6 @@
 export const SHOP_ITEMS = [
+  // ─── Wallpapers ──────────────────────────────────────────────────────────────
+  // (UNTOUCHED - these are the in-app themes, not downloadable wallpapers)
   {
     id: 'wallpaper-default',
     type: 'wallpaper',
@@ -10,47 +12,6 @@ export const SHOP_ITEMS = [
     gradient: 'linear-gradient(135deg, #07050f 0%, #0e0b1a 100%)',
     imageSrc: null,
     description: 'The default. Cold, precise, and deeply purple.',
-  },
-  {
-    id: 'outfit-default',
-    type: 'outfit',
-    name: 'Classic Hoodie',
-    requiredLevel: 1,
-    emoji: '🧡',
-    accent: '#ff8c42',
-    filter: 'none',
-    spriteOverrides: {
-      idle:         { src: '/sprites/teaching.png',      blend: false },
-      'idle-sleep': { src: '/sprites/idle.png',          blend: true  },
-      happy:        { src: '/sprites/oops.png',          blend: true  },
-      thinking:     { src: '/sprites/thinking.png',      blend: false },
-      sad:          { src: '/sprites/frustrated.png',    blend: false },
-      surprised:    { src: '/sprites/excited.png',       blend: true  },
-      domain:       { src: '/sprites/excited.png',       blend: true  },
-    },
-    imageSrc: null,
-    description: "Rust-Chan's signature look. Always with you.",
-    isDefault: true,
-  },
-  {
-    id: 'outfit-gamedev',
-    type: 'outfit',
-    name: 'Game Dev',
-    requiredLevel: 2,
-    emoji: '🧥',
-    accent: '#6eb4ff',
-    filter: 'none',
-    spriteOverrides: {
-      idle:         { src: '/sprites/uniforms/game-dev/teaching.png',   blend: false },
-      'idle-sleep': { src: '/sprites/uniforms/game-dev/idle.png',       blend: false },
-      happy:        { src: '/sprites/uniforms/game-dev/oops.png',       blend: false },
-      thinking:     { src: '/sprites/uniforms/game-dev/thinking.png',   blend: false },
-      sad:          { src: '/sprites/uniforms/game-dev/frustrated.png', blend: false },
-      surprised:    { src: '/sprites/uniforms/game-dev/excited.png',    blend: false },
-      domain:       { src: '/sprites/uniforms/game-dev/excited.png',    blend: false },
-    },
-    imageSrc: null,
-    description: 'Game Dev Mode - ON!',
   },
   {
     id: 'wallpaper-steel',
@@ -65,26 +26,6 @@ export const SHOP_ITEMS = [
     description: 'Gunmetal grey, deep crimson, abyssal blue eyes. The borrow checker\'s throne.',
   },
   {
-    id: 'outfit-competitive-programmer',
-    type: 'outfit',
-    name: 'Competitive Programmer',
-    requiredLevel: 4,
-    emoji: '🎀',
-    accent: '#b46eff',
-    filter: 'none',
-    spriteOverrides: {
-      idle:         { src: '/sprites/uniforms/comp/teaching.png',   blend: false },
-      'idle-sleep': { src: '/sprites/uniforms/comp/idle.png',       blend: false },
-      happy:        { src: '/sprites/uniforms/comp/oops.png',       blend: false },
-      thinking:     { src: '/sprites/uniforms/comp/thinking.png',   blend: false },
-      sad:          { src: '/sprites/uniforms/comp/frustrated.png', blend: false },
-      surprised:    { src: '/sprites/uniforms/comp/excited.png',    blend: false },
-      domain:       { src: '/sprites/uniforms/comp/excited.png',    blend: false },
-    },
-    imageSrc: null,
-    description: 'Winner Winner Chicken? Wait.. Wrong Game!',
-  },
-  {
     id: 'wallpaper-indigo-gold',
     type: 'wallpaper',
     name: 'Stormcaller',
@@ -95,26 +36,6 @@ export const SHOP_ITEMS = [
     gradient: 'linear-gradient(160deg, #08060f 0%, #130d28 55%, #1a1030 100%)',
     imageSrc: null,
     description: 'Storm grey, charcoal, blazing orange lightning. The storm unleashed.',
-  },
-  {
-    id: 'outfit-Witch',
-    type: 'outfit',
-    name: 'Memory Witch',
-    requiredLevel: 6,
-    emoji: '🪄',
-    accent: '#ffd700',
-    filter: 'none',
-    spriteOverrides: {
-      idle:         { src: '/sprites/uniforms/mage/teaching.png',   blend: false },
-      'idle-sleep': { src: '/sprites/uniforms/mage/idle.png',       blend: false },
-      happy:        { src: '/sprites/uniforms/mage/oops.png',       blend: false },
-      thinking:     { src: '/sprites/uniforms/mage/thinking.png',   blend: false },
-      sad:          { src: '/sprites/uniforms/mage/frustrated.png', blend: false },
-      surprised:    { src: '/sprites/uniforms/mage/excited.png',    blend: false },
-      domain:       { src: '/sprites/uniforms/mage/excited.png',    blend: false },
-    },
-    imageSrc: null,
-    description: 'The Pointers Bend to her Will. Allegedly.',
   },
   {
     id: 'wallpaper-crimson',
@@ -129,26 +50,6 @@ export const SHOP_ITEMS = [
     description: 'Deep crimson, black, neon orange. A rain-slicked alley at 2 a.m.',
   },
   {
-    id: 'outfit-military',
-    type: 'outfit',
-    name: 'Low Level Operative',
-    requiredLevel: 8,
-    emoji: '🕶️',
-    accent: '#4fffb0',
-    filter: 'none',
-    spriteOverrides: {
-      idle:         { src: '/sprites/uniforms/military/teaching.png',   blend: false },
-      'idle-sleep': { src: '/sprites/uniforms/military/idle.png',       blend: false },
-      happy:        { src: '/sprites/uniforms/military/oops.png',       blend: false },
-      thinking:     { src: '/sprites/uniforms/military/thinking.png',   blend: false },
-      sad:          { src: '/sprites/uniforms/military/frustrated.png', blend: false },
-      surprised:    { src: '/sprites/uniforms/military/excited.png',    blend: false },
-      domain:       { src: '/sprites/uniforms/military/excited.png',    blend: false },
-    },
-    imageSrc: null,
-    description: 'Cold logic. Precise execution. Every register matters.',
-  },
-  {
     id: 'wallpaper-terminal',
     type: 'wallpaper',
     name: 'Compiled',
@@ -160,32 +61,35 @@ export const SHOP_ITEMS = [
     imageSrc: null,
     description: 'Cool blue, terminal green, matte black. The channel room, no warnings.',
   },
+
+  // ─── Outfits (YOUR EXACT 10 OUTFITS) ──────────────────────────────────────
   {
-    id: 'outfit-legendary',
+    id: 'outfit-default',
     type: 'outfit',
-    name: 'Undefined Behaviour Queen',
-    requiredLevel: 10,
-    emoji: '👘',
-    accent: '#7c6fff',
+    name: "Blacksmith's Apron",
+    requiredLevel: 1,
+    emoji: '🔨',
+    accent: '#ff8c42',
     filter: 'none',
     spriteOverrides: {
-      idle:         { src: '/sprites/uniforms/queen/teaching.png',   blend: false },
-      'idle-sleep': { src: '/sprites/uniforms/queen/idle.png',       blend: false },
-      happy:        { src: '/sprites/uniforms/queen/oops.png',       blend: false },
-      thinking:     { src: '/sprites/uniforms/queen/thinking.png',   blend: false },
-      sad:          { src: '/sprites/uniforms/queen/frustrated.png', blend: false },
-      surprised:    { src: '/sprites/uniforms/queen/excited.png',    blend: false },
-      domain:       { src: '/sprites/uniforms/queen/excited.png',    blend: false },
+      idle:         { src: '/sprites/teaching.png',      blend: false },
+      'idle-sleep': { src: '/sprites/idle.png',          blend: true  },
+      happy:        { src: '/sprites/oops.png',          blend: true  },
+      thinking:     { src: '/sprites/thinking.png',      blend: false },
+      sad:          { src: '/sprites/frustrated.png',    blend: false },
+      surprised:    { src: '/sprites/excited.png',       blend: true  },
+      domain:       { src: '/sprites/excited.png',       blend: true  },
     },
     imageSrc: null,
-    description: 'You survived Undefined Behaviour. Wear the Crown.',
+    description: 'The forge never sleeps, and neither does the borrow checker.',
+    isDefault: true,
   },
-    {
+  {
     id: 'outfit-debug-mode',
     type: 'outfit',
-    name: 'Debug Mode',
+    name: 'Off-Duty Flannel',
     requiredLevel: 5,
-    emoji: '😴',
+    emoji: '🪵',
     accent: '#a0c4ff',
     filter: 'none',
     spriteOverrides: {
@@ -198,16 +102,35 @@ export const SHOP_ITEMS = [
       domain:       { src: '/sprites/uniforms/casual/excited.png',    blend: false },
     },
     imageSrc: null,
-    description: '14 hours in. The energy drink is empty. The bug is still there.',
+    description: 'The build compiled. Time for coffee.',
     comingSoon: false,
   },
-
-    {
+  {
+    id: 'outfit-Witch',
+    type: 'outfit',
+    name: "Iron Knight's Plate",
+    requiredLevel: 6,
+    emoji: '⚔️',
+    accent: '#ffd700',
+    filter: 'none',
+    spriteOverrides: {
+      idle:         { src: '/sprites/uniforms/mage/teaching.png',   blend: false },
+      'idle-sleep': { src: '/sprites/uniforms/mage/idle.png',       blend: false },
+      happy:        { src: '/sprites/uniforms/mage/oops.png',       blend: false },
+      thinking:     { src: '/sprites/uniforms/mage/thinking.png',   blend: false },
+      sad:          { src: '/sprites/uniforms/mage/frustrated.png', blend: false },
+      surprised:    { src: '/sprites/uniforms/mage/excited.png',    blend: false },
+      domain:       { src: '/sprites/uniforms/mage/excited.png',    blend: false },
+    },
+    imageSrc: null,
+    description: 'Memory safety is armor. Wear it well.',
+  },
+  {
     id: 'outfit-kunoichi',
     type: 'outfit',
-    name: 'Kunoichi',
+    name: 'Crimson Architect',
     requiredLevel: 7,
-    emoji: '🥷',
+    emoji: '🏗️',
     accent: '#4fffb0',
     filter: 'none',
     spriteOverrides: {
@@ -220,13 +143,13 @@ export const SHOP_ITEMS = [
       domain:       { src: '/sprites/uniforms/ninja/excited.png',    blend: false },
     },
     imageSrc: null,
-    description: 'Silent code. No warnings. No errors. The kunai is shaped like a semicolon.',
+    description: 'I designed this system. Don\'t break it.',
     comingSoon: false,
   },
-    {
+  {
     id: 'outfit-idol',
     type: 'outfit',
-    name: 'Idol',
+    name: 'Idol — Zero-Cost Abstraction',
     requiredLevel: 7,
     emoji: '✨',
     accent: '#ff85c2',
@@ -241,16 +164,15 @@ export const SHOP_ITEMS = [
       domain:       { src: '/sprites/uniforms/idol/excited.png',    blend: false },
     },
     imageSrc: null,
-    description: 'She already performs a Celebration. Might as well dress for it.',
+    description: 'Performance is the show. The show must go on.',
     comingSoon: false,
   },
-
-    {
+  {
     id: 'outfit-professor',
     type: 'outfit',
-    name: 'Professor',
+    name: 'Master Smith',
     requiredLevel: 8,
-    emoji: '🥼',
+    emoji: '🔥👘',
     accent: '#e0e0e0',
     filter: 'none',
     spriteOverrides: {
@@ -263,20 +185,77 @@ export const SHOP_ITEMS = [
       domain:       { src: '/sprites/uniforms/prof/excited.png',    blend: false },
     },
     imageSrc: null,
-    description: 'Lab coat. Round glasses. Clipboard. She means it this time.',
+    description: 'The forge has taught me everything. Now I teach you.',
     comingSoon: false,
   },
-  // ─── Coming Soon ─────────────────────────────────────────────────────────────
-
-
-
-
+  {
+    id: 'outfit-geisha-assassin',
+    type: 'outfit',
+    name: 'Geisha Assassin',
+    requiredLevel: 9,
+    emoji: '🎴🔫',
+    accent: '#ff6b9d',
+    filter: 'none',
+    spriteOverrides: {
+      idle:         { src: '/sprites/uniforms/geisha/teaching.png',   blend: false },
+      'idle-sleep': { src: '/sprites/uniforms/geisha/idle.png',       blend: false },
+      happy:        { src: '/sprites/uniforms/geisha/oops.png',       blend: false },
+      thinking:     { src: '/sprites/uniforms/geisha/thinking.png',   blend: false },
+      sad:          { src: '/sprites/uniforms/geisha/frustrated.png', blend: false },
+      surprised:    { src: '/sprites/uniforms/geisha/excited.png',    blend: false },
+      domain:       { src: '/sprites/uniforms/geisha/excited.png',    blend: false },
+    },
+    imageSrc: null,
+    description: 'Silent. Precise. Correct.',
+    comingSoon: false,
+  },
+  {
+    id: 'outfit-goddess-thunder',
+    type: 'outfit',
+    name: 'Goddess of Thunder',
+    requiredLevel: 9,
+    emoji: '⚡🌩️',
+    accent: '#ffcc00',
+    filter: 'none',
+    spriteOverrides: {
+      idle:         { src: '/sprites/uniforms/thunder/teaching.png',   blend: false },
+      'idle-sleep': { src: '/sprites/uniforms/thunder/idle.png',       blend: false },
+      happy:        { src: '/sprites/uniforms/thunder/oops.png',       blend: false },
+      thinking:     { src: '/sprites/uniforms/thunder/thinking.png',   blend: false },
+      sad:          { src: '/sprites/uniforms/thunder/frustrated.png', blend: false },
+      surprised:    { src: '/sprites/uniforms/thunder/excited.png',    blend: false },
+      domain:       { src: '/sprites/uniforms/thunder/excited.png',    blend: false },
+    },
+    imageSrc: null,
+    description: 'I am the borrow checker. I am the storm.',
+    comingSoon: false,
+  },
+  {
+    id: 'outfit-legendary',
+    type: 'outfit',
+    name: "Crate Maintainer's Crown",
+    requiredLevel: 10,
+    emoji: '👑',
+    accent: '#7c6fff',
+    filter: 'none',
+    spriteOverrides: {
+      idle:         { src: '/sprites/uniforms/queen/teaching.png',   blend: false },
+      'idle-sleep': { src: '/sprites/uniforms/queen/idle.png',       blend: false },
+      happy:        { src: '/sprites/uniforms/queen/oops.png',       blend: false },
+      thinking:     { src: '/sprites/uniforms/queen/thinking.png',   blend: false },
+      sad:          { src: '/sprites/uniforms/queen/frustrated.png', blend: false },
+      surprised:    { src: '/sprites/uniforms/queen/excited.png',    blend: false },
+      domain:       { src: '/sprites/uniforms/queen/excited.png',    blend: false },
+    },
+    imageSrc: null,
+    description: 'You shipped to crates.io. Wear the crown.',
+  },
   {
     id: 'outfit-swimsuit',
     type: 'outfit',
-    name: 'Out of Scope',
+    name: 'Off the Clock',
     requiredLevel: 10,
-    emoji: '👾',
+    emoji: '🏖️',
     accent: '#ff4f7b',
     filter: 'none',
     spriteOverrides: {
@@ -289,135 +268,127 @@ export const SHOP_ITEMS = [
       domain:       { src: '/sprites/uniforms/bikini/excited.png',    blend: false },
     },
     imageSrc: null,
-    description: 'Out of scope. Out of office. Out of reach.',
+    description: 'cargo test passed. I won.',
     comingSoon: false,
   },
 ];
 
+// ─── Exports ──────────────────────────────────────────────────────────────────
 export const WALLPAPERS = SHOP_ITEMS.filter((i) => i.type === 'wallpaper');
 export const OUTFITS = SHOP_ITEMS.filter((i) => i.type === 'outfit' && !i.isDefault);
 export const DEFAULT_OUTFIT = SHOP_ITEMS.find((i) => i.isDefault);
 
+// ─── DOWNLOADABLE WALLPAPERS (YOUR EXACT 10) ──────────────────────────────
 export const DOWNLOADABLE_WALLPAPERS = [
   {
-    id: 'dl-wallpaper-01',
-    name: 'Compile Time',
-    emoji: '🌆',
+    id: 'dl-wallpaper-forge',
+    name: 'The Forge', // Your exact name
+    emoji: '🔥', // Your exact emoji
+    gradient: 'linear-gradient(160deg, #1a0a00 0%, #3a1a00 55%, #2a0f00 100%)',
+    accent: '#ff6e2a',
+    imageSrc: '/wallpapers/rustchan-forge.png',
+    fileName: 'rustchan-forge.png',
+    description: 'She is the forge. She is the craft.', // Your exact description
+    requiredLevel: 1,
+  },
+  {
+    id: 'dl-wallpaper-compile-time',
+    name: 'Compile Time, No Warnings', // Your exact name
+    emoji: '🌆', // Your exact emoji
     gradient: 'linear-gradient(160deg, #2a1a2e 0%, #4a1a3e 60%, #1a0f1a 100%)',
     accent: '#b46eff',
-    imageSrc: '/wallpapers/rustchan-compile-time.png',
-    fileName: 'rustchan-compile-time.png',
-    description: 'The longest wait ends with two words.',
+    imageSrc: '/wallpapers/rustchan-compile-clean.png',
+    fileName: 'rustchan-compile-clean.png',
+    description: 'The build compiled. Quiet pride.', // Your exact description
     requiredLevel: 3,
   },
   {
-    id: 'dl-wallpaper-02',
-    name: 'The Stack',
-    emoji: '🏰',
+    id: 'dl-wallpaper-borrow-throne',
+    name: "The Borrow Checker's Throne", // Your exact name
+    emoji: '🏰', // Your exact emoji
     gradient: 'linear-gradient(160deg, #07050f 0%, #0e0b1a 55%, #130f22 100%)',
     accent: '#7c6fff',
-    imageSrc: '/wallpapers/rustchan-the-stack.png',
-    fileName: 'rustchan-the-stack.png',
-    description: 'Every function leaves a footprint.',
+    imageSrc: '/wallpapers/rustchan-borrow-throne.png',
+    fileName: 'rustchan-borrow-throne.png',
+    description: 'Waiting for you to understand ownership.', // Your exact description
     requiredLevel: 5,
   },
   {
-    id: 'dl-wallpaper-03',
-    name: 'Rainy Commute',
-    emoji: '🌧️',
-    gradient: 'linear-gradient(160deg, #0a0518 0%, #1a0f3e 55%, #2e1a4a 100%)',
-    accent: '#b46eff',
-    imageSrc: '/wallpapers/rustchan-rainy.png',
-    fileName: 'rustchan-rainy-commute.png',
-    description: 'Even after work... the code follows.',
-    requiredLevel: 7,
-  },
-  {
-    id: 'dl-wallpaper-04',
-    name: 'Vacation Build',
-    emoji: '🌅',
+    id: 'dl-wallpaper-foundry-sunrise',
+    name: 'Iron Foundry Sunrise', // Your exact name
+    emoji: '🌅', // Your exact emoji
     gradient: 'linear-gradient(160deg, #2e1a0a 0%, #4a2e1a 55%, #1a0f0a 100%)',
     accent: '#ffcc6e',
-    imageSrc: '/wallpapers/rustchan-vacation-build.png',
-    fileName: 'rustchan-vacation-build.png',
-    description: 'Even the longest debug sessions end with a sunset.',
-    requiredLevel: 9,
-  },
-
-  {
-    id: 'dl-wallpaper-05',
-    name: 'Cherry Blossom Courtyard',
-    emoji: '🌸',
-    gradient: 'linear-gradient(160deg, #2e1a2a 0%, #3d1a35 55%, #1a0f1a 100%)',
-    accent: '#ffb7d5',
-    imageSrc: '/wallpapers/rustchan-sakura.png',
-    fileName: 'rustchan-cherry-blossom.png',
-    description: 'Petals falling. Effective Modern C++ open on her lap. A perfect afternoon.',
+    imageSrc: '/wallpapers/rustchan-foundry-sunrise.png',
+    fileName: 'rustchan-foundry-sunrise.png',
+    description: 'Worked all night. Satisfied.', // Your exact description
     requiredLevel: 3,
-    comingSoon: false,
   },
-
- {
-    id: 'dl-wallpaper-mountain-summit',
-    name: 'Mountain Summit',
-    emoji: '🏔️',
-    gradient: 'linear-gradient(160deg, #0f0c00 0%, #2a2000 55%, #1a1500 100%)',
-    accent: '#ffcc6e',
-    imageSrc: '/wallpapers/rustchan-mountain-summit.png',
-    fileName: 'rustchan-mountain-summit.png',
-    description: 'She made it to the top. The flag says int main(). So did you.',
-    requiredLevel: 5,
-    comingSoon: false,
-  },
-
-    {
-    id: 'dl-wallpaper-autumn-library',
-    name: 'Autumn Library',
-    emoji: '📚',
-    gradient: 'linear-gradient(160deg, #1a0f00 0%, #2e1a00 55%, #1a1000 100%)',
-    accent: '#ffaa55',
-    imageSrc: '/wallpapers/rustchan-autumn-library.png',
-    fileName: 'rustchan-autumn-library.png',
-    description: 'Amber lamplight. C++ textbooks. Leaves outside the window. The perfect session.',
-    requiredLevel: 5,
-    comingSoon: false,
-  },
- 
   {
-    id: 'dl-wallpaper-rooftop-garden',
-    name: 'Rooftop Garden',
-    emoji: '🌿',
-    gradient: 'linear-gradient(160deg, #001a0a 0%, #002e12 55%, #001a08 100%)',
-    accent: '#7fff9b',
-    imageSrc: '/wallpapers/rustchan-rooftop-garden.png',
-    fileName: 'rustchan-rooftop-garden.png',
-    description: "City skyline. Surrounded by plants. The sign reads // TODO: touch grass.",
+    id: 'dl-wallpaper-channel-room',
+    name: 'The Channel Room', // Your exact name
+    emoji: '🛰️', // Your exact emoji
+    gradient: 'linear-gradient(160deg, #0a0a1a 0%, #1a1a3e 55%, #0a0a1a 100%)',
+    accent: '#4fb0ff',
+    imageSrc: '/wallpapers/rustchan-channel-room.png',
+    fileName: 'rustchan-channel-room.png',
+    description: 'She designed the concurrency.', // Your exact description
     requiredLevel: 7,
-    comingSoon: false,
   },
   {
-    id: 'dl-wallpaper-neon-arcade',
-    name: 'Neon Arcade',
-    emoji: '🕹️',
-    gradient: 'linear-gradient(160deg, #1a0010 0%, #2e0020 55%, #1a000f 100%)',
-    accent: '#ff69b4',
-    imageSrc: '/wallpapers/rustchan-neon-arcade.png',
-    fileName: 'rustchan-neon-arcade.png',
-    description: 'Hot pink. Neon yellow. One of the cabinets is running the RPG from the curriculum.',
+    id: 'dl-wallpaper-rooftop-watchpoint',
+    name: 'Rooftop Watchpoint', // Your exact name
+    emoji: '🌃', // Your exact emoji
+    gradient: 'linear-gradient(160deg, #0a0a1a 0%, #1a1a2e 55%, #0a0a1a 100%)',
+    accent: '#4faaff',
+    imageSrc: '/wallpapers/rustchan-rooftop-watchpoint.png',
+    fileName: 'rustchan-rooftop-watchpoint.png',
+    description: 'The system is stable. She\'s watching.', // Your exact description
     requiredLevel: 7,
-    comingSoon: false,
   },
   {
-    id: 'dl-wallpaper-shrine-steps',
-    name: 'Shrine Steps',
-    emoji: '🏮',
-    gradient: 'linear-gradient(160deg, #1a0f0a 0%, #2a1a10 55%, #1a0f08 100%)',
-    accent: '#ffccaa',
-    imageSrc: '/wallpapers/rustchan-shrine-steps.png',
-    fileName: 'rustchan-shrine-steps.png',
-    description: 'Stone steps. Dawn lanterns. Morning mist. The most peaceful wallpaper in the set.',
+    id: 'dl-wallpaper-forge-dusk-alt',
+    name: 'Forge at Dusk (Alt)', // Your exact name
+    emoji: '🌆', // Your exact emoji
+    gradient: 'linear-gradient(160deg, #1a0f0a 0%, #3a1a0a 55%, #1a0a05 100%)',
+    accent: '#ff8c42',
+    imageSrc: '/wallpapers/rustchan-forge-dusk-alt.png',
+    fileName: 'rustchan-forge-dusk-alt.png',
+    description: 'A rare moment of peace.', // Your exact description
+    requiredLevel: 5,
+  },
+  {
+    id: 'dl-wallpaper-geisha-target',
+    name: "The Geisha's Target", // Your exact name
+    emoji: '🎴', // Your exact emoji
+    gradient: 'linear-gradient(160deg, #1a0a0f 0%, #3a1a2a 55%, #1a0a15 100%)',
+    accent: '#ff6b9d',
+    imageSrc: '/wallpapers/rustchan-geisha-target.png',
+    fileName: 'rustchan-geisha-target.png',
+    description: 'She\'s not just a teacher — she\'s a weapon.', // Your exact description
     requiredLevel: 9,
-    comingSoon: false,
+  },
+  {
+    id: 'dl-wallpaper-storm-unleashed',
+    name: 'The Storm Unleashed', // Your exact name
+    emoji: '⚡🌩️', // Your exact emoji
+    gradient: 'linear-gradient(160deg, #0a0a1a 0%, #1a1a2a 55%, #0a0a1a 100%)',
+    accent: '#ffcc00',
+    imageSrc: '/wallpapers/rustchan-storm-unleashed.png',
+    fileName: 'rustchan-storm-unleashed.png',
+    description: 'She is the storm. She is the judgment.', // Your exact description
+    requiredLevel: 9,
+  },
+  {
+    id: 'dl-wallpaper-beach-day',
+    name: 'Beach Day', // Your exact name
+    emoji: '🏖️', // Your exact emoji
+    gradient: 'linear-gradient(160deg, #1a2a3a 0%, #3a5a7a 55%, #1a2a3a 100%)',
+    accent: '#ffcc6e',
+    imageSrc: '/wallpapers/rustchan-beach-day.png',
+    fileName: 'rustchan-beach-day.png',
+    description: 'The build shipped. She can rest.', // Your exact description
+    requiredLevel: 10,
   },
 ];
 
