@@ -1,33 +1,33 @@
 {
   "id": "1.5",
-  "title": "Arithmetic & Logical Operators",
+  "title": "Variables and Mutability",
   "type": "coding",
   "phase1": {
-    "code": "#include <iostream>\n\nint main() {\n    // Arithmetic operators\n    int health = 100;\n    int damage = 25;\n    int heal = 30;\n    \n    int newHealth = health - damage;\n    std::cout << \"After taking \" << damage << \" damage: \" << newHealth << std::endl;\n    \n    int healedHealth = newHealth + heal;\n    std::cout << \"After healing \" << heal << \" HP: \" << healedHealth << std::endl;\n    \n    // Shorthand operators\n    int gold = 50;\n    gold += 20;  // Add 20 gold\n    std::cout << \"Gold after pickup: \" << gold << std::endl;\n    \n    gold *= 2;   // Double gold\n    std::cout << \"Gold after doubling: \" << gold << std::endl;\n    \n    // Logical operators\n    int playerHealth = 75;\n    int playerLevel = 5;\n    bool hasPotion = true;\n    \n    // AND — both must be true\n    bool canFightBoss = (playerLevel >= 10 && playerHealth >= 80);\n    std::cout << \"Can fight boss? \" << (canFightBoss ? \"Yes\" : \"No\") << std::endl;\n    \n    // OR — at least one must be true\n    bool canHeal = (hasPotion || playerHealth < 30);\n    std::cout << \"Can heal? \" << (canHeal ? \"Yes\" : \"No\") << std::endl;\n    \n    // NOT — flips the value\n    bool isDead = false;\n    bool isAlive = !isDead;\n    std::cout << \"Is alive? \" << (isAlive ? \"Yes\" : \"No\") << std::endl;\n    \n    return 0;\n}",
-    "output": "After taking 25 damage: 75\nAfter healing 30 HP: 105\nGold after pickup: 70\nGold after doubling: 140\nCan fight boss? No\nCan heal? Yes\nIs alive? Yes",
-    "explanation": "🎮 **Operators are how you calculate everything in your game.**\n\n**Arithmetic Operators:**\n| Operator | Use | Example |\n|----------|-----|---------|\n| `+` | Addition | `health + heal` |\n| `-` | Subtraction | `health - damage` |\n| `*` | Multiplication | `gold * 2` |\n| `/` | Division | `gold / 2` |\n| `%` | Modulus (remainder) | `10 % 3 = 1` |\n\n**Shorthand Operators:**\n| Operator | Means | Use |\n|----------|-------|-----|\n| `+=` | Add and assign | `gold += 20` → `gold = gold + 20` |\n| `-=` | Subtract and assign | `health -= 10` |\n| `*=` | Multiply and assign | `gold *= 2` |\n| `/=` | Divide and assign | `gold /= 2` |\n\n**Logical Operators (for decisions):**\n| Operator | Use |\n|----------|-----|\n| `&&` | AND — both must be true |\n| `||` | OR — at least one must be true |\n| `!`  | NOT — flips true/false |\n\n**PlusPlus-chan's note:**\nThe shorthand operators (`+=`, `*=`) are faster to write and compile to the same machine code. Use them. They're how game devs write efficient code.\n\n**Logical operators are the foundation of game AI.**",
-    "openingDialogue": "Operators are your game's math engine. Let's calculate. 🔢"
+    "code": "fn main() {\n    // Immutable (default)\n    let name = \"Hero\";\n    let health = 100;\n    let is_alive = true;\n    \n    // Mutable (explicit)\n    let mut score = 0;\n    score = 10;\n    score = 20;\n    \n    // Shadowing\n    let x = 5;\n    let x = x + 10;  // New variable shadows the old one\n    \n    // Constants\n    const MAX_HEALTH: i32 = 100;\n    const GAME_TITLE: &str = \"Rust Arena\";\n    \n    println!(\"Name: {}\", name);\n    println!(\"Health: {}\", health);\n    println!(\"Alive: {}\", is_alive);\n    println!(\"Score: {}\", score);\n    println!(\"x: {}\", x);\n    println!(\"Max Health: {}\", MAX_HEALTH);\n    println!(\"Game: {}\", GAME_TITLE);\n}",
+    "output": "Name: Hero\nHealth: 100\nAlive: true\nScore: 20\nx: 15\nMax Health: 100\nGame: Rust Arena",
+    "explanation": "🦀 **Rust variables are immutable by default. This is a feature.**\n\n**Immutable (`let`):**\n```rust\nlet name = \"Hero\";  // Cannot change\n// name = \"Aragorn\";  // ERROR!\n```\n\n**Mutable (`let mut`):**\n```rust\nlet mut score = 0;\nscore = 10;\nscore = 20;  // Allowed!\n```\n\n**Shadowing:**\n```rust\nlet x = 5;\nlet x = x + 10;  // New variable, old one is hidden\n```\n\n**Constants (`const`):**\n```rust\nconst MAX_HEALTH: i32 = 100;  // Type required, compile-time constant\n```\n\n**Rust-chan says:**\n\"Immutability is not a restriction. It's a guarantee. When you see `let`, you know that value will never change. That's information the compiler uses.\"\n\n**When to use what:**\n\n| Type | When to use |\n|------|-------------|\n| `let` | Values that never change |\n| `let mut` | Values that need to change |\n| Shadowing | Reusing variable names with new types |\n| `const` | Compile-time constants |",
+    "openingDialogue": "Immutability is not a restriction. It's a guarantee. 🔒"
   },
   "phase2": {
-    "brokenCode": "#include <iostream>\n\nint main() {\n    int playerHealth = 50;\n    int damage = 30;\n    \n    // Mistake: assigning with = instead of comparing with ==\n    if (playerHealth = damage) {\n        std::cout << \"Player health equals damage\" << std::endl;\n    }\n    \n    return 0;\n}",
-    "errorMessage": "(No error — but the LOGIC is completely wrong! This compiles and runs with incorrect behavior.)",
-    "explanation": "This is the classic C++ trap: using `=` instead of `==` in a condition.\n\n`=` is assignment. It sets `playerHealth` to the value of `damage`.\n`==` is comparison. It checks if they're equal.\n\n**What's happening:**\n`if (playerHealth = damage)` — this assigns `30` to `playerHealth`, then checks if `30` is true (it is). So the condition always runs.\n\n**The fix:**\n```cpp\nif (playerHealth == damage) {  // Compare, don't assign\n    // ...\n}\n```\n\n**PlusPlus-chan says:**\n\"This is the most common mistake in C++. Java-chan would scold you gently. I'm going to show you this error until you never make it again.\""
+    "brokenCode": "fn main() {\n    let health = 100;\n    health = 80;  // ERROR!\n    println!(\"Health: {}\", health);\n}",
+    "errorMessage": "error[E0384]: cannot assign twice to immutable variable `health`\n --> src/main.rs:3:5\n  |\n2 |     let health = 100;\n  |         ------\n  |         |\n  |         first assignment to `health`\n  |         help: consider making this binding mutable: `mut health`\n3 |     health = 80;  // ERROR!\n  |     ^^^^^^^^^^^ cannot assign twice to immutable variable\n\nFor more information about this error, try `rustc --explain E0384`.",
+    "explanation": "You tried to change an immutable variable.\n\n**The fix:**\n```rust\nlet mut health = 100;  // ← add `mut`\nhealth = 80;\n```\n\n**Rust-chan says:**\n\"The compiler's hint is right there. `mut`. You didn't need to read a blog post. You just needed to read the error.\""
   },
   "phase3": {
-    "prompt": "Write a C++ program that:\n\n1. Declares `int health = 80`, `int armor = 20`\n2. Calculates `effectiveHealth = health + armor`\n3. Checks if `health > 50` (prints \"Healthy\" or \"Not healthy\")\n4. Checks if `health > 50 && armor > 10` (prints \"Tanky\" or \"Not tanky\")\n\nUse the ternary operator for the first check.\n\nPrint all results.",
+    "prompt": "Write a Rust program that:\n\n1. Declares an immutable variable `name` = \"Hero\"\n2. Declares a mutable variable `level` = 1\n3. Changes `level` to 2\n4. Uses shadowing to change `name` to \"Aragorn\"\n5. Prints both variables\n\nRequirements:\n- Use `let` for immutable\n- Use `let mut` for mutable\n- Use shadowing for the name change",
     "validationPattern": {
-      "required": ["int", "=", "+", ">", "&&", "std::cout"],
-      "forbidden": ["using namespace"],
-      "fullRegex": "int\\s+\\w+\\s*=\\s*80\\s*;[\\s\\S]*int\\s+\\w+\\s*=\\s*20\\s*;[\\s\\S]*\\+\\s*\\w+[\\s\\S]*\\?[\\s\\S]*:"
+      "required": ["let", "let mut", "mut", "name", "level", "println!"],
+      "forbidden": ["", ""],
+      "fullRegex": "let\\s+name\\s*=\\s*\"Hero\"[\\s\\S]*let\\s+mut\\s+level\\s*=\\s*1[\\s\\S]*level\\s*=\\s*2[\\s\\S]*let\\s+name\\s*=\\s*\"Aragorn\"[\\s\\S]*println!"
     },
     "dialogueHints": [
-      "Define health and armor first.",
-      "effectiveHealth = health + armor.",
-      "Ternary: `(condition) ? \"True\" : \"False\"`",
-      "Use `&&` for the AND check."
+      "`let name = \"Hero\";` is immutable.",
+      "`let mut level = 1;` then `level = 2;`",
+      "Shadowing: `let name = \"Aragorn\";`",
+      "Print both variables."
     ],
-    "solution": "#include <iostream>\n\nint main() {\n    int health = 80;\n    int armor = 20;\n    int effectiveHealth = health + armor;\n    \n    std::cout << \"Effective health: \" << effectiveHealth << std::endl;\n    \n    std::cout << \"Health status: \" \n              << (health > 50 ? \"Healthy\" : \"Not healthy\") \n              << std::endl;\n    \n    std::cout << \"Tanky status: \" \n              << (health > 50 && armor > 10 ? \"Tanky\" : \"Not tanky\") \n              << std::endl;\n    \n    return 0;\n}",
-    "openingDialogue": "Show me you know your operators. No mistakes. 😤"
+    "solution": "fn main() {\n    let name = \"Hero\";\n    let mut level = 1;\n    level = 2;\n    let name = \"Aragorn\";\n    println!(\"Name: {}\", name);\n    println!(\"Level: {}\", level);\n}",
+    "openingDialogue": "Variables and mutability. Show me you understand. 🔒"
   },
   "xpReward": 10
 }

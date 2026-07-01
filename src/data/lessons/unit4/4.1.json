@@ -1,30 +1,30 @@
 {
   "id": "4.1",
-  "title": "What is the STL?",
-  "type": "conceptual",
+  "title": "Vectors",
+  "type": "coding",
   "phase1": {
-    "code": "",
-    "output": "",
-    "explanation": "🎮 **The Standard Template Library (STL) is C++'s weapon arsenal.**\n\n**What is the STL?**\n\nThe STL is a collection of powerful, reusable components that handle common programming tasks. It's part of the C++ Standard Library.\n\nInstead of writing your own linked list, dynamic array, or sorting algorithm, you use STL containers and algorithms. They're fast, tested, and optimized.\n\n**The Four Pillars of STL:**\n\n| Pillar | What it does | Examples |\n|--------|--------------|----------|\n| **Containers** | Store data | `std::vector`, `std::map`, `std::set` |\n| **Algorithms** | Process data | `std::sort`, `std::find`, `std::copy` |\n| **Iterators** | Connect containers and algorithms | `begin()`, `end()`, `std::iterator` |\n| **Functors** | Callable objects | Function pointers, lambdas |\n\n**Why STL matters for games:**\n\n| Use | STL Component |\n|-----|---------------|\n| **Player inventory** | `std::vector<Item>` |\n| **Enemy roster** | `std::list<Enemy*>` |\n| **Item database** | `std::unordered_map<int, Item>` |\n| **High scores** | `std::set<int>` |\n| **Search/sort** | `std::find`, `std::sort` |\n\n**Benefits of using STL:**\n\n| Benefit | Why |\n|---------|-----|\n| **Performance** | Highly optimized |\n| **Reliability** | Well-tested |\n| **Portability** | Works on all platforms |\n| **Productivity** | Write less code |\n| **Readability** | Standard naming |\n\n**Common STL Containers:**\n\n| Container | Use |\n|-----------|-----|\n| `std::vector` | Dynamic array, fast random access |\n| `std::array` | Fixed-size array |\n| `std::list` | Doubly-linked list |\n| `std::map` | Key-value pairs (sorted) |\n| `std::unordered_map` | Key-value pairs (hash table) |\n| `std::set` | Unique elements (sorted) |\n| `std::unordered_set` | Unique elements (hash table) |\n| `std::queue` | FIFO queue |\n| `std::stack` | LIFO stack |\n| `std::deque` | Double-ended queue |\n\n**PlusPlus-chan says:**\n\"The STL is your toolbox. You could build everything from scratch — but why would you? Use the tools. Build your game, not the wheel.\"",
-    "openingDialogue": "The STL: your game dev toolkit. Ready to use. ⚔️"
+    "code": "fn main() {\n    // ---- Creating vectors ----\n    let mut v1: Vec<i32> = Vec::new();\n    let v2 = vec![1, 2, 3, 4, 5];\n    let v3 = vec![0; 10];  // 10 zeros\n    \n    // ---- Adding elements ----\n    v1.push(10);\n    v1.push(20);\n    v1.push(30);\n    \n    // ---- Accessing elements ----\n    let first = &v2[0];  // Panics if out of bounds\n    let second = v2.get(1);  // Returns Option\n    \n    println!(\"v1: {:?}\", v1);\n    println!(\"v2: {:?}\", v2);\n    println!(\"v3: {:?}\", v3);\n    println!(\"first: {}, second: {:?}\", first, second);\n    \n    // ---- Iterating ----\n    println!(\"\\n=== Iterating ===\");\n    for i in &v1 {\n        println!(\"v1 element: {}\", i);\n    }\n    \n    // ---- Mutating while iterating ----\n    for i in &mut v1 {\n        *i *= 2;\n    }\n    println!(\"After doubling: {:?}\", v1);\n    \n    // ---- Removing elements ----\n    let last = v1.pop();  // Removes and returns last\n    println!(\"Popped: {:?}, v1: {:?}\", last, v1);\n    \n    // ---- Inserting elements ----\n    v1.insert(1, 15);  // Insert at index 1\n    println!(\"After insert: {:?}\", v1);\n    \n    // ---- Removing by index ----\n    let removed = v1.remove(2);\n    println!(\"Removed: {}, v1: {:?}\", removed, v1);\n    \n    // ---- Vector of structs ----\n    #[derive(Debug)]\n    struct Player {\n        name: String,\n        health: i32,\n    }\n    \n    let mut players = vec![\n        Player { name: String::from(\"Hero\"), health: 100 },\n        Player { name: String::from(\"Aragorn\"), health: 120 },\n    ];\n    \n    players.push(Player { name: String::from(\"Gandalf\"), health: 80 });\n    \n    println!(\"\\nPlayers: {:#?}\", players);\n    \n    // ---- Vector with capacity ----\n    let mut with_capacity: Vec<i32> = Vec::with_capacity(10);\n    println!(\"Capacity: {}, Length: {}\", with_capacity.capacity(), with_capacity.len());\n    \n    for i in 0..5 {\n        with_capacity.push(i);\n    }\n    println!(\"After push: Capacity: {}, Length: {}\", with_capacity.capacity(), with_capacity.len());\n    \n    // ---- Vector methods ----\n    let numbers = vec![5, 2, 8, 1, 9, 3];\n    \n    // Contains\n    println!(\"Contains 5? {}\", numbers.contains(&5));\n    \n    // Sort\n    let mut sorted = numbers.clone();\n    sorted.sort();\n    println!(\"Sorted: {:?}\", sorted);\n    \n    // Reverse\n    let mut reversed = numbers.clone();\n    reversed.reverse();\n    println!(\"Reversed: {:?}\", reversed);\n    \n    // Join\n    let words = vec![\"Hello\", \"world\", \"from\", \"Rust\"];\n    let joined = words.join(\" \");\n    println!(\"Joined: {}\", joined);\n}",
+    "output": "v1: [10, 20, 30]\nv2: [1, 2, 3, 4, 5]\nv3: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]\nfirst: 1, second: Some(2)\n\n=== Iterating ===\nv1 element: 10\nv1 element: 20\nv1 element: 30\nAfter doubling: [20, 40, 60]\nPopped: Some(60), v1: [20, 40]\nAfter insert: [20, 15, 40]\nRemoved: 40, v1: [20, 15]\n\nPlayers: [\n    Player {\n        name: \"Hero\",\n        health: 100,\n    },\n    Player {\n        name: \"Aragorn\",\n        health: 120,\n    },\n    Player {\n        name: \"Gandalf\",\n        health: 80,\n    },\n]\nCapacity: 10, Length: 0\nAfter push: Capacity: 10, Length: 5\nContains 5? true\nSorted: [1, 2, 3, 5, 8, 9]\nReversed: [3, 9, 1, 8, 2, 5]\nJoined: Hello world from Rust",
+    "explanation": "🦀 **Vectors are growable arrays.**\n\n**Vector operations:**\n\n| Operation | Code |\n|-----------|------|\n| Create | `vec![1, 2, 3]` |\n| Push | `v.push(4)` |\n| Pop | `v.pop()` |\n| Get | `v[0]` or `v.get(0)` |\n| Iterate | `for i in &v` |\n| Insert | `v.insert(1, 5)` |\n| Remove | `v.remove(1)` |\n| Sort | `v.sort()` |\n\n**Rust-chan says:**\n\"Vectors are the most used collection in Rust. They're flexible, fast, and safe.\"\n\n**When to use vectors:**\n| Situation | Use Vector |\n|-----------|-----------|\n| Dynamic list | ✅ |\n| Unknown size | ✅ |\n| Need to grow | ✅ |\n| Random access | ✅ |",
+    "openingDialogue": "Vectors. Growable arrays. 🦀"
   },
   "phase2": {
-    "brokenCode": "",
-    "errorMessage": "",
-    "explanation": "Conceptual lesson — no broken code here!\n\n**Common misconception:** \"STL is slow, I should write my own containers.\"\n\nActually: STL is highly optimized. Writing your own containers is rarely faster unless you have very specific needs. The STL has been refined over decades.\n\n**Another misconception:** \"STL is hard to learn.\"\n\nActually: STL containers work similarly. Once you learn `std::vector`, you can use most other containers easily. They share common interfaces.\n\n**PlusPlus-chan says:**\n\"Don't reinvent the wheel. The STL is your friend. Use it.\""
+    "brokenCode": "fn main() {\n    let v = vec![1, 2, 3];\n    let first = v[10];  // Index out of bounds!\n    println!(\"first: {}\", first);\n}",
+    "errorMessage": "thread 'main' panicked at 'index out of bounds: the len is 3 but the index is 10', src/main.rs:3:18\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\nThe program panics because the index is out of bounds.",
+    "explanation": "Accessing an out-of-bounds index with `[]` panics.\n\n**The fix:**\n```rust\nlet first = v.get(10);  // Returns None\nif let Some(value) = first {\n    println!(\"first: {}\", value);\n} else {\n    println!(\"Index out of bounds\");\n}\n```\n\n**Rust-chan says:**\n\"Use `get()` for safe access. It returns Option, not a panic.\""
   },
   "phase3": {
-    "prompt": "Which statement about the STL is TRUE?\n\nA) The STL is an external library you need to download separately\nB) STL containers are not well-suited for game development\nC) STL provides containers, algorithms, and iterators\nD) `std::vector` is a fixed-size container\n\nSelect the CORRECT answer.",
+    "prompt": "Which method would you use to safely access a vector element?\n\nA) `v[index]`\nB) `v.get(index)`\nC) `v.at(index)`\nD) `v.index(index)`\n\nSelect the CORRECT answer.",
     "validationPattern": {
-      "mcqAnswer": "C"
+      "mcqAnswer": "B"
     },
     "dialogueHints": [
-      "Think about what the STL actually includes.",
-      "The STL is part of the C++ Standard Library.",
-      "What are the four pillars of the STL?"
+      "Think about which method returns Option.",
+      "It's safe to use when you're not sure the index exists.",
+      "It returns None if the index is out of bounds."
     ],
     "solution": null,
-    "openingDialogue": "Let's see if you understand the STL. 🤔"
+    "openingDialogue": "Vector check. Which method is safe? 🤔"
   },
   "xpReward": 10
 }

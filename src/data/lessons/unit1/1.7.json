@@ -1,33 +1,33 @@
 {
   "id": "1.7",
-  "title": "if / else — branching decisions",
+  "title": "Compound Types — Tuples and Arrays",
   "type": "coding",
   "phase1": {
-    "code": "#include <iostream>\n#include <string>\n\nint main() {\n    int health = 75;\n    int gold = 30;\n    bool hasKey = false;\n    \n    // Simple if\n    std::cout << \"=== Health Check ===\" << std::endl;\n    if (health > 50) {\n        std::cout << \"You are healthy!\" << std::endl;\n    }\n    \n    // if-else\n    std::cout << \"\\n=== Gold Check ===\" << std::endl;\n    if (gold >= 50) {\n        std::cout << \"You have enough gold to buy the sword!\" << std::endl;\n    } else {\n        std::cout << \"You need \" << (50 - gold) << \" more gold for the sword.\" << std::endl;\n    }\n    \n    // if-else-if chain\n    std::cout << \"\\n=== Key Check ===\" << std::endl;\n    if (hasKey) {\n        std::cout << \"You open the door with the key!\" << std::endl;\n    } else {\n        std::cout << \"The door is locked. You need a key.\" << std::endl;\n    }\n    \n    // Nested if\n    std::cout << \"\\n=== Treasure Room ===\" << std::endl;\n    bool hasSword = false;\n    bool hasShield = false;\n    \n    if (hasSword) {\n        if (hasShield) {\n            std::cout << \"You have both! You are fully equipped.\" << std::endl;\n        } else {\n            std::cout << \"You have a sword but no shield.\" << std::endl;\n        }\n    } else {\n        if (hasShield) {\n            std::cout << \"You have a shield but no sword.\" << std::endl;\n        } else {\n            std::cout << \"You are completely unarmed!\" << std::endl;\n        }\n    }\n    \n    return 0;\n}",
-    "output": "=== Health Check ===\nYou are healthy!\n\n=== Gold Check ===\nYou need 20 more gold for the sword.\n\n=== Key Check ===\nThe door is locked. You need a key.\n\n=== Treasure Room ===\nYou are completely unarmed!",
-    "explanation": "🎮 **if/else is how games make decisions.**\n\nEvery game decision is an if statement:\n- \"If the player has enough health, they can fight\"\n- \"If the player has the key, they can open the door\"\n- \"If the player's level is high enough, they can equip the sword\"\n\n**Syntax:**\n```cpp\nif (condition) {\n    // Code runs if condition is true\n}\n\nif (condition) {\n    // Runs if true\n} else {\n    // Runs if false\n}\n\nif (condition1) {\n    // Runs if condition1 is true\n} else if (condition2) {\n    // Runs if condition1 is false AND condition2 is true\n} else {\n    // Runs if all conditions are false\n}\n```\n\n**Nested if:**\nWhen you need to check multiple conditions that depend on each other.\n\n**Common game uses:**\n- Combat outcomes\n- Quest completion checks\n- NPC dialogue branches\n- Level-up requirements",
-    "openingDialogue": "Decisions. This is where games get interesting. 🤔🎮"
+    "code": "fn main() {\n    // ---- Tuples - group different types ----\n    let player: (&str, i32, bool) = (\"Hero\", 100, true);\n    \n    // Access by index\n    println!(\"Name: {}\", player.0);\n    println!(\"Health: {}\", player.1);\n    println!(\"Alive: {}\", player.2);\n    \n    // Destructuring\n    let (name, health, alive) = player;\n    println!(\"Destructured: {} is {} HP, alive: {}\", name, health, alive);\n    \n    // ---- Arrays - same type, fixed size ----\n    let scores: [i32; 5] = [10, 20, 30, 40, 50];\n    \n    // Access by index\n    println!(\"First score: {}\", scores[0]);\n    println!(\"Last score: {}\", scores[4]);\n    \n    // Array length\n    println!(\"Array length: {}\", scores.len());\n    \n    // Iterating over array\n    for score in scores {\n        println!(\"Score: {}\", score);\n    }\n    \n    // Array literal with same value\n    let zeros: [i32; 5] = [0; 5];  // [0, 0, 0, 0, 0]\n    println!(\"Zeros: {:?}\", zeros);\n}",
+    "output": "Name: Hero\nHealth: 100\nAlive: true\nDestructured: Hero is 100 HP, alive: true\nFirst score: 10\nLast score: 50\nArray length: 5\nScore: 10\nScore: 20\nScore: 30\nScore: 40\nScore: 50\nZeros: [0, 0, 0, 0, 0]",
+    "explanation": "🦀 **Compound types group multiple values.**\n\n**Tuples:**\n- Fixed size, can contain different types\n- Access by index: `.0`, `.1`, `.2`\n- Destructure: `let (a, b, c) = tuple`\n\n```rust\nlet player: (&str, i32, bool) = (\"Hero\", 100, true);\nlet name = player.0;  // \"Hero\"\nlet (name, health, alive) = player;\n```\n\n**Arrays:**\n- Fixed size, all same type\n- Access by index: `[0]`, `[1]`\n- Length: `.len()`\n- Type: `[T; N]` where T is type, N is size\n\n```rust\nlet scores: [i32; 5] = [10, 20, 30, 40, 50];\nlet first = scores[0];  // 10\nlet len = scores.len();  // 5\n```\n\n**Rust-chan says:**\n\"Tuples for grouping different things. Arrays for lists of the same thing. Both are fixed size. Don't try to grow them — that's what vectors are for.\"",
+    "openingDialogue": "Tuples and arrays. Group your data. 📦"
   },
   "phase2": {
-    "brokenCode": "#include <iostream>\n\nint main() {\n    int health = 30;\n    \n    // Missing semicolon after else\n    if (health > 50) {\n        std::cout << \"Healthy!\" << std::endl;\n    }\n    else \n        std::cout << \"Not healthy!\" << std::endl;\n    }\n    \n    return 0;\n}",
-    "errorMessage": "main.cpp:10:1: error: 'else' without a previous 'if'\n   10 | }\n      | ^\n1 error",
-    "explanation": "The `else` has no matching `if` because the structure is broken.\n\n**What went wrong:**\nThe `else` statement must be directly connected to an `if`. Here, the `if` block closed with `}`, and then `else` appears after it with a missing `{`.\n\n**The fix:**\n```cpp\nif (health > 50) {\n    std::cout << \"Healthy!\" << std::endl;\n} else {\n    std::cout << \"Not healthy!\" << std::endl;\n}\n```\n\n**PlusPlus-chan says:**\n\"Indentation matters for readability, but for the compiler, braces matter more. Always use `{}` even for single statements. It prevents this error.\""
+    "brokenCode": "fn main() {\n    let scores: [i32; 3] = [10, 20, 30];\n    println!(\"Fourth: {}\", scores[3]);  // Index out of bounds!\n}",
+    "errorMessage": "error: index out of bounds: the length is 3 but the index is 3\n --> src/main.rs:3:30\n  |\n3 |     println!(\"Fourth: {}\", scores[3]);  // Index out of bounds!\n  |                              ^^^^^^^^^\n  |\n  = note: the length is 3, but the index is 3\n\nerror: could not compile `your-project` due to 1 previous error",
+    "explanation": "Arrays have a fixed size. Index 3 doesn't exist in an array of length 3.\n\n**The fix:**\n```rust\nlet scores: [i32; 3] = [10, 20, 30];\nprintln!(\"Third: {}\", scores[2]);  // Valid indices: 0, 1, 2\n```\n\n**Rust-chan says:**\n\"The compiler caught this. In C++, this would be undefined behavior. In Rust, it's a compile error. That's the difference.\""
   },
   "phase3": {
-    "prompt": "Write a C++ program that:\n\n1. Declares `int playerHealth = 45` and `int playerGold = 80`\n2. If health is greater than 50: prints \"You are feeling strong!\"\n3. Else if health is between 20 and 50: prints \"You are wounded, but alive.\"\n4. Else: prints \"You are critically injured!\"\n5. If gold is greater than 50: prints \"You have enough money for the potion.\"\n6. Else: prints \"You're too poor for that potion.\"\n\nRequirements:\n- Use if-else-if for health\n- Use if-else for gold",
+    "prompt": "Write a Rust program that:\n\n1. Declares a tuple `player_stats` with:\n   - Name: \"Hero\" (string slice)\n   - Level: 5 (i32)\n   - Health: 100 (i32)\n\n2. Prints each value using index notation\n\n3. Declares an array `high_scores` with values 1200, 950, 850\n\n4. Prints the array length and each score using a loop\n\nRequirements:\n- Use tuple indexing `.0`, `.1`, `.2`\n- Use array `.len()`\n- Use a `for` loop to print scores",
     "validationPattern": {
-      "required": ["if", "else if", "else", ">", "<= 50", "std::cout"],
-      "forbidden": ["using namespace"],
-      "fullRegex": "if\\s*\\([\\s\\S]*\\)\\s*\\{[\\s\\S]*\\}\\s*else\\s+if\\s*\\([\\s\\S]*\\)\\s*\\{[\\s\\S]*\\}\\s*else\\s*\\{[\\s\\S]*\\}"
+      "required": ["tuple", "array", ".0", ".len()", "for", "println!"],
+      "forbidden": ["", ""],
+      "fullRegex": "\\([^\\)]*\\)[\\s\\S]*\\.[0-2][\\s\\S]*\\[[^\\]]*\\][\\s\\S]*\\.len\\(\\)[\\s\\S]*for"
     },
     "dialogueHints": [
-      "Health conditions: > 50, between 20 and 50, else",
-      "Between: `health >= 20 && health <= 50`",
-      "Gold: `if (gold > 50)` else",
-      "Use `std::cout` for each branch"
+      "Tuple: `let player_stats = (\"Hero\", 5, 100);`",
+      "Index: `player_stats.0`, `player_stats.1`, `player_stats.2`",
+      "Array: `let high_scores = [1200, 950, 850];`",
+      "Loop: `for score in high_scores { println!(\"{}\", score); }`"
     ],
-    "solution": "#include <iostream>\n\nint main() {\n    int playerHealth = 45;\n    int playerGold = 80;\n    \n    std::cout << \"=== Player Status ===\" << std::endl;\n    \n    if (playerHealth > 50) {\n        std::cout << \"You are feeling strong!\" << std::endl;\n    } else if (playerHealth >= 20 && playerHealth <= 50) {\n        std::cout << \"You are wounded, but alive.\" << std::endl;\n    } else {\n        std::cout << \"You are critically injured!\" << std::endl;\n    }\n    \n    if (playerGold > 50) {\n        std::cout << \"You have enough money for the potion.\" << std::endl;\n    } else {\n        std::cout << \"You're too poor for that potion.\" << std::endl;\n    }\n    \n    return 0;\n}",
-    "openingDialogue": "Branching time. Make the right choices. ⚔️"
+    "solution": "fn main() {\n    let player_stats = (\"Hero\", 5, 100);\n    println!(\"Name: {}\", player_stats.0);\n    println!(\"Level: {}\", player_stats.1);\n    println!(\"Health: {}\", player_stats.2);\n    \n    let high_scores = [1200, 950, 850];\n    println!(\"Number of scores: {}\", high_scores.len());\n    for score in high_scores {\n        println!(\"Score: {}\", score);\n    }\n}",
+    "openingDialogue": "Compound types. Group your data. Show me. 📦"
   },
   "xpReward": 10
 }

@@ -5,11 +5,11 @@ import useLessonStore from '../store/lessonStore';
 import './Home.css';
 
 const UNITS = [
-  { id: 1, title: 'C++ Foundations',                   icon: '⬡', lessons: 15 },
-  { id: 2, title: 'Object Oriented C++',               icon: '⬡', lessons: 15 },
-  { id: 3, title: 'Memory & Pointers',                 icon: '⬡', lessons: 15 },
-  { id: 4, title: 'STL & Templates',                   icon: '⬡', lessons: 15 },
-  { id: 5, title: 'File I/O, Errors & Shipping',       icon: '⬡', lessons: 15 },
+  { id: 1, title: 'Rust Basics',                   icon: '⬡', lessons: 15 },
+  { id: 2, title: 'Ownership and Borrowing',               icon: '⬡', lessons: 15 },
+  { id: 3, title: 'Types, Traits, and Patterns',                 icon: '⬡', lessons: 15 },
+  { id: 4, title: 'Collections, Closures, and Concurrency',                   icon: '⬡', lessons: 15 },
+  { id: 5, title: 'Async Rust and Final Project',       icon: '⬡', lessons: 15 },
 ];
 
 const Home = () => {

@@ -1,30 +1,30 @@
 {
   "id": "1.2",
-  "title": "Setting up your environment (g++, VS Code)",
+  "title": "Setting Up Rust and Cargo",
   "type": "conceptual",
   "phase1": {
     "code": "",
     "output": "",
-    "explanation": "Before we write any code, let's get your environment set up.\n\n🔧 **What you need:**\n\n1. **A C++ Compiler (g++):**\n   - Windows: Install MinGW-w64 or use MSVC\n   - macOS: Install Xcode Command Line Tools (`xcode-select --install`)\n   - Linux: `sudo apt install g++` (Ubuntu/Debian)\n\n   Check it works: Open a terminal and type `g++ --version`\n\n2. **VS Code (or any editor):**\n   - Download from code.visualstudio.com\n   - Install the C/C++ extension by Microsoft\n\n3. **Your First Project:**\n   Create a folder called `cpp-game` — this is where your journey begins.\n\n💡 **Pro tip from PlusPlus-chan:**\n\nLearn to compile from the command line before using an IDE. That's how you learn what's really happening. An IDE hides the compile steps, but you need to know them:\n\n```bash\ng++ -o myprogram main.cpp\n./myprogram\n```\n\nJava-chan hides the compiler from you. I don't. You're going to see every step of the transformation from code to executable.\n\n**You're not just learning C++ — you're learning how computers actually work.** That's the part that matters.",
-    "openingDialogue": "No fancy IDEs hiding the truth. Terminal first. Always. 🖥️💀"
+    "explanation": "🦀 **Before you write Rust, you need the tools.**\n\n**1. Install Rust via rustup**\n\nRust uses `rustup` — the official installer and version manager.\n\n```bash\ncurl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh\n```\n\nOr visit rustup.rs for the installer.\n\n**2. Verify Installation**\n\n```bash\nrustc --version\ncargo --version\n```\n\nYou should see something like:\n```\nrustc 1.85.0 (4cb7a17a5 2025-02-20)\ncargo 1.85.0 (d73d2caf9 2025-02-13)\n```\n\n**3. What is Cargo?**\n\nCargo is Rust's build system and package manager:\n- `cargo new project_name` — creates a new project\n- `cargo build` — builds the project\n- `cargo run` — builds and runs\n- `cargo check` — checks without building (fast!)\n- `cargo test` — runs tests\n\n**Rust-chan says:**\n\"`cargo check` is your best friend. Use it. It's fast. It catches your mistakes before you run.\"\n\n**4. Your First Project**\n\n```bash\ncargo new hello_rust\ncd hello_rust\ncargo run\n```\n\nYou should see:\n```\nHello, world!\n```\n\n**Rust-chan says:**\n\"If you can't get this working, nothing else matters. Fix your toolchain first.\"",
+    "openingDialogue": "No excuses. Install Rust. Then come back. 🔧"
   },
   "phase2": {
     "brokenCode": "",
     "errorMessage": "",
-    "explanation": "Conceptual lesson — no broken code here!\n\nCommon issue: `g++: command not found`\n\nThis means the compiler isn't in your PATH. Don't panic. PlusPlus-chan has seen this before.\n\n**Fixes:**\n- Windows: Make sure MinGW/bin is in your PATH\n- macOS: Run `xcode-select --install`\n- Linux: `sudo apt install g++` (or your distro's equivalent)\n\n**Check your work:**\nOpen a terminal and type:\n```bash\ng++ --version\n```\nIf you see a version number, you're ready. If not... PlusPlus-chan is patient. She'll wait."
+    "explanation": "Conceptual lesson — no broken code!\n\n**Common issue:** `rustc: command not found`\n\n**Fix:** The installer didn't add Rust to your PATH. Run:\n```bash\nsource ~/.cargo/env\n```\n\nOr restart your terminal.\n\n**Rust-chan says:**\n\"If the compiler isn't in your PATH, you can't compile. Fix it. Then we can talk.\""
   },
   "phase3": {
-    "prompt": "What command do you use to compile a C++ file called `main.cpp` into an executable called `mygame`?\n\nA) `g++ main.cpp -o mygame`\nB) `g++ -o main.cpp mygame`\nC) `compile main.cpp mygame`\nD) `g++ main.cpp --exec mygame`\n\nSelect the CORRECT command.",
+    "prompt": "What does `cargo check` do?\n\nA) It builds and runs the program\nB) It checks for errors without building a full executable\nC) It runs all tests\nD) It publishes the package to crates.io\n\nSelect the CORRECT answer.",
     "validationPattern": {
-      "mcqAnswer": "A"
+      "mcqAnswer": "B"
     },
     "dialogueHints": [
-      "The '-o' flag means 'output'.", 
-      "The source file comes first, then the output flag.", 
-      "Think about what order makes sense: source → output."
+      "Think about the fastest way to check for errors.",
+      "It doesn't generate an executable.",
+      "It's faster than `cargo build`."
     ],
     "solution": null,
-    "openingDialogue": "Time to prove you can use the terminal. Don't worry, I'll help. 💻"
+    "openingDialogue": "Toolchain check. What does `cargo check` do? 🤔"
   },
   "xpReward": 10
 }

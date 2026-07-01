@@ -1,33 +1,33 @@
 {
   "id": "1.6",
-  "title": "Taking Input — the player types something",
+  "title": "Scalar Types",
   "type": "coding",
   "phase1": {
-    "code": "#include <iostream>\n#include <string>\n\nint main() {\n    std::string playerName;\n    int playerAge;\n    \n    // Ask for input\n    std::cout << \"Welcome, adventurer!\" << std::endl;\n    std::cout << \"What is your name? \";\n    std::cin >> playerName;\n    \n    std::cout << \"How old are you, \" << playerName << \"? \";\n    std::cin >> playerAge;\n    \n    std::cout << \"\\n=== Character Sheet ===\" << std::endl;\n    std::cout << \"Name: \" << playerName << std::endl;\n    std::cout << \"Age: \" << playerAge << std::endl;\n    \n    // Input with multiple words\n    std::cin.ignore();  // Clear the buffer\n    std::string fullName;\n    std::cout << \"Enter your full name (with spaces): \";\n    std::getline(std::cin, fullName);\n    std::cout << \"Full name: \" << fullName << std::endl;\n    \n    return 0;\n}",
-    "output": "Welcome, adventurer!\nWhat is your name? Hero\nHow old are you, Hero? 25\n\n=== Character Sheet ===\nName: Hero\nAge: 25\nEnter your full name (with spaces): Hero the Brave\nFull name: Hero the Brave",
-    "explanation": "🎮 **Input is how the player controls your game.**\n\n`std::cin` — Console input. It reads what the player types.\n\n**Reading different types:**\n| Type | How to read |\n|------|-------------|\n| `int` | `std::cin >> variable;` |\n| `double` | `std::cin >> variable;` |\n| `std::string` (no spaces) | `std::cin >> variable;` |\n| `std::string` (with spaces) | `std::getline(std::cin, variable);` |\n\n**Common issue (and fix):**\n- `std::cin >>` leaves a newline in the buffer\n- `std::cin.ignore()` clears the buffer before `getline()`\n\n**Game design note:**\nIn a real game, you'd use input for:\n- Character creation (name, class, stats)\n- Menu selections (\"Press 1 to attack\")\n- Saving/loading (\"Enter save name:\")\n\n**PlusPlus-chan says:**\n\"Java-chan has `Scanner`. I have `std::cin`. Same concept, but I don't hide the buffer management from you. You need to know why `getline()` behaves differently.\"",
-    "openingDialogue": "Now the player can talk back. This is when it gets real. 🎮💬"
+    "code": "fn main() {\n    // Integer types\n    let a: i8 = 127;          // -128 to 127\n    let b: u8 = 255;          // 0 to 255\n    let c: i32 = 100_000;     // Most common\n    let d: i64 = 9_223_372_036_854_775_807;\n    let e: isize = 10;        // Platform-dependent\n    \n    // Floating point types\n    let f: f32 = 3.14;        // 32-bit float\n    let g: f64 = 3.14159;     // 64-bit float (default)\n    \n    // Boolean type\n    let is_ready: bool = true;\n    let is_done: bool = false;\n    \n    // Character type (4 bytes, Unicode)\n    let letter: char = 'A';\n    let smiley: char = '😊';\n    let chinese: char = '中';\n    \n    println!(\"i8: {}\", a);\n    println!(\"u8: {}\", b);\n    println!(\"i32: {}\", c);\n    println!(\"i64: {}\", d);\n    println!(\"isize: {}\", e);\n    println!(\"f32: {}\", f);\n    println!(\"f64: {}\", g);\n    println!(\"bool: {}\", is_ready);\n    println!(\"char: {}\", letter);\n    println!(\"Emoji: {}\", smiley);\n    println!(\"Chinese: {}\", chinese);\n}",
+    "output": "i8: 127\nu8: 255\ni32: 100000\ni64: 9223372036854775807\nisize: 10\nf32: 3.14\nf64: 3.14159\nbool: true\nchar: A\nEmoji: 😊\nChinese: 中",
+    "explanation": "🦀 **Rust has four scalar types: integers, floats, booleans, and characters.**\n\n**Integer types:**\n\n| Size | Signed | Unsigned |\n|------|--------|----------|\n| 8-bit | `i8` | `u8` |\n| 16-bit | `i16` | `u16` |\n| 32-bit | `i32` | `u32` |\n| 64-bit | `i64` | `u64` |\n| 128-bit | `i128` | `u128` |\n| arch | `isize` | `usize` |\n\n**Rust-chan says:**\n\"`i32` is the default. Use it unless you have a reason not to. It's fast, it's portable, it's the right size for most things.\"\n\n**Floating point:**\n\n| Type | Precision |\n|------|-----------|\n| `f32` | 32-bit, ~6 decimal digits |\n| `f64` | 64-bit, ~15 decimal digits (default) |\n\n**Boolean:**\n- `true` or `false`\n- Used in conditions, comparisons\n\n**Character:**\n- 4 bytes, Unicode\n- Single quotes: `'A'`, `'😊'`, `'中'`\n\n**Rust-chan says:**\n\"Characters are Unicode. This isn't C. You can use emoji. Don't abuse it.\"",
+    "openingDialogue": "Types. Learn them. Use them. 🧊"
   },
   "phase2": {
-    "brokenCode": "#include <iostream>\n#include <string>\n\nint main() {\n    int age;\n    std::string name;\n    \n    std::cout << \"Enter your age: \";\n    std::cin >> age;\n    \n    std::cout << \"Enter your name: \";\n    std::getline(std::cin, name);  // Problem: this skips!\n    \n    std::cout << \"Name: \" << name << \", Age: \" << age << std::endl;\n    return 0;\n}",
-    "errorMessage": "Enter your age: 25\nEnter your name: Name: , Age: 25\n\n(No error — but the name input was SKIPPED!)",
-    "explanation": "This is the classic `cin` vs `getline()` trap.\n\n**What's happening:**\n1. `std::cin >> age` reads the number 25\n2. It leaves the newline character `\\n` in the buffer\n3. `std::getline()` reads that leftover newline as an empty string\n4. So `name` is empty, and the program skips the name input\n\n**The fix:**\n```cpp\nstd::cin >> age;\nstd::cin.ignore();  // ← This clears the buffer!\nstd::getline(std::cin, name);\n```\n\n**PlusPlus-chan says:**\n\"This is a rite of passage. Every C++ developer has been bitten by this. Now you know why.\""
+    "brokenCode": "fn main() {\n    let x: i8 = 300;  // Too big for i8!\n    println!(\"x: {}\", x);\n}",
+    "errorMessage": "error: literal out of range for `i8`\n --> src/main.rs:2:17\n  |\n2 |     let x: i8 = 300;  // Too big for i8!\n  |                 ^^^\n  |\n  = note: the literal `300` does not fit into the type `i8` whose range is `-128..=127`\n  = help: consider using the type `i16` instead\n\nerror: could not compile `your-project` due to 1 previous error",
+    "explanation": "You tried to store a value that doesn't fit in `i8`.\n\n**The fix:**\n```rust\nlet x: i16 = 300;  // Use a larger type\n// or\nlet x: i32 = 300;  // The default integer type\n```\n\n**Rust-chan says:**\n\"The compiler caught this at compile time. In C++, this would silently overflow. In Rust, it's a compile error. That's the difference.\""
   },
   "phase3": {
-    "prompt": "Write a C++ program that:\n\n1. Asks the player \"Enter your class (Warrior/Mage/Rogue): \" and stores it in a `std::string`\n2. Asks the player \"Enter your starting level: \" and stores it in an `int`\n3. Prints a character summary:\n```\n=== Character Created ===\nClass: [class]\nStarting Level: [level]\n```\n\nRequirements:\n- Use `std::cin` for the level (int)\n- Use `std::getline()` for the class (string with spaces allowed)\n- Handle the buffer issue correctly with `std::cin.ignore()`",
+    "prompt": "Write a Rust program that declares:\n\n1. An `i32` with value 42\n2. An `f64` with value 3.14159\n3. A `bool` with value false\n4. A `char` with value '🦀'\n5. Prints all four values\n\nRequirements:\n- Use explicit type annotations\n- Use all four scalar types",
     "validationPattern": {
-      "required": ["std::cin", "std::getline", "std::cin.ignore", "int", "std::string"],
-      "forbidden": ["using namespace"],
-      "fullRegex": "std::cin\\s*>>\\s*\\w+\\s*;[\\s\\S]*std::cin\\.ignore\\s*\\([\\s\\S]*\\)[\\s\\S]*std::getline\\s*\\(\\s*std::cin\\s*,\\s*\\w+\\s*\\)"
+      "required": ["i32", "f64", "bool", "char", "println!"],
+      "forbidden": ["", ""],
+      "fullRegex": ": i32\\s*=\\s*\\d+[\\s\\S]*: f64\\s*=\\s*[\\d.]+[\\s\\S]*: bool\\s*=\\s*(true|false)[\\s\\S]*: char\\s*=\\s*'"
     },
     "dialogueHints": [
-      "Read the level with `std::cin >> level`",
-      "Call `std::cin.ignore();` before `getline()`",
-      "Read the class with `std::getline(std::cin, characterClass)`",
-      "Print both values"
+      "`let num: i32 = 42;`",
+      "`let pi: f64 = 3.14159;`",
+      "`let flag: bool = false;`",
+      "`let crab: char = '🦀';`"
     ],
-    "solution": "#include <iostream>\n#include <string>\n\nint main() {\n    std::string characterClass;\n    int level;\n    \n    std::cout << \"Enter your class (Warrior/Mage/Rogue): \";\n    std::getline(std::cin, characterClass);\n    \n    std::cout << \"Enter your starting level: \";\n    std::cin >> level;\n    \n    std::cout << \"\\n=== Character Created ===\" << std::endl;\n    std::cout << \"Class: \" << characterClass << std::endl;\n    std::cout << \"Starting Level: \" << level << std::endl;\n    \n    return 0;\n}",
-    "openingDialogue": "Let the player build their character. Make it real. 🎭"
+    "solution": "fn main() {\n    let num: i32 = 42;\n    let pi: f64 = 3.14159;\n    let flag: bool = false;\n    let crab: char = '🦀';\n    \n    println!(\"Number: {}\", num);\n    println!(\"Pi: {}\", pi);\n    println!(\"Flag: {}\", flag);\n    println!(\"Crab: {}\", crab);\n}",
+    "openingDialogue": "Types. Declare them. Show me. 🧊"
   },
   "xpReward": 10
 }

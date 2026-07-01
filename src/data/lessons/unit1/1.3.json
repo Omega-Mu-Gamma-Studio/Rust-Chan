@@ -1,33 +1,32 @@
 {
   "id": "1.3",
-  "title": "Your first program — Hello, Player!",
+  "title": "Your First Rust Program",
   "type": "coding",
   "phase1": {
-    "code": "#include <iostream>\n\nint main() {\n    std::cout << \"Hello, Player!\" << std::endl;\n    std::cout << \"Welcome to your first C++ game.\" << std::endl;\n    return 0;\n}",
-    "output": "Hello, Player!\nWelcome to your first C++ game.",
-    "explanation": "🎮 **This is your first step into game development.**\n\nLet's break this down — every line matters:\n\n`#include <iostream>` — This is your input/output library. It's how you talk to the player. In game terms, it's your UI system.\n\n`int main()` — The entry point of every C++ program. This is where your game starts. Every game has a main loop — this is its origin.\n\n`std::cout` — Console output. In a real game, this would be rendering graphics. For now, you're rendering text to the terminal. Baby steps.\n\n`<<` — The stream operator. It pushes text to the console. Think of it like sending data to the display.\n\n`std::endl` — End line. Equivalent to pressing Enter after a line of text.\n\n`return 0;` — The program exits successfully. Zero means 'no error' — in game terms, you quit cleanly.\n\n🔥 **PlusPlus-chan's insight:**\n\nJava-chan would start with `System.out.println(\"Hello World\")` and call it a day. I'm starting with `#include`, `std::cout`, and `std::endl`. \n\nWhy? Because I'm showing you the **machinery** behind the output. You're not just printing — you're learning what printing actually is. That's the difference between learning to use a tool and learning to build one.",
-    "openingDialogue": "Your first program. It's small, but this is how every game starts. 🔥💻"
+    "code": "fn main() {\n    println!(\"Hello, Player!\");\n    println!(\"Welcome to Rust.\");\n}",
+    "output": "Hello, Player!\nWelcome to Rust.",
+    "explanation": "🦀 **Your first Rust program. Simple. Clean. Correct.**\n\n```rust\nfn main() {\n    println!(\"Hello, Player!\");\n    println!(\"Welcome to Rust.\");\n}\n```\n\n**Breaking it down:**\n\n| Code | What it does |\n|------|--------------|\n| `fn main()` | Defines the main function — entry point of every Rust program |\n| `println!()` | A macro that prints to the console with a newline |\n| `println!` | Print with newline — not `println` |\n| `;` | Semicolon ends every statement |\n\n**Rust-chan says:**\n\"`println!` is a macro, not a function. That's why it has a `!`. Macros can do things functions can't. In this case, they can check your format string at compile time.\"\n\n**Key differences from C++/Java:**\n| Rust | C++ | Java |\n|------|-----|------|\n| `fn main()` | `int main()` | `public static void main(String[] args)` |\n| `println!(\"text\")` | `std::cout << \"text\" << std::endl` | `System.out.println(\"text\")` |\n| `;` required | `;` required | `;` required |\n\n**Rust-chan says:**\n\"No boilerplate. Just code. Compile it. Run it. Understand it.\"",
+    "openingDialogue": "Your first Rust program. Simple. Clean. Correct. 🦀"
   },
   "phase2": {
-    "brokenCode": "#include <iostream>\n\nint main() \n    std::cout << \"Hello, Player!\" << std::endl;\n    std::cout << \"Welcome to your first C++ game.\" << std::endl;\n    return 0;\n}",
-    "errorMessage": "main.cpp:5:1: error: expected ';' before 'return'\n    5 |     return 0;\n      |     ^~~~~~\nmain.cpp:4:5: error: expected '(' before 'return'\n    4 |     std::cout << \"Hello, Player!\" << std::endl;\n      |     ^~~~~~\nmain.cpp:6:1: error: expected unqualified-id before '}' token\n    6 | }\n      | ^",
-    "explanation": "See that? The `{` after `main()` is missing. \n\nIn C++, `main()` needs an opening `{` to start its code block. Without it, the compiler gets confused.\n\n🔍 **Error breakdown:**\n\n| Error | What Actually Means |\n|-------|---------------------|\n| `expected ';' before 'return'` | The compiler thinks something is missing before `return` (it's the missing `{`). |\n| `expected '(' before 'return'` | The compiler is trying to parse the function differently. |\n| `expected unqualified-id before '}'` | The compiler reached the end of the file and something was incomplete. |\n\n**The fix is simple:**\n```cpp\nint main() {    // ← This curly brace is the whole problem\n    std::cout << \"Hello, Player!\" << std::endl;\n    return 0;\n}\n```\n\n**Why this happens:**\nC++ is strict about syntax. One missing character can cascade into multiple errors. The compiler tries to recover but makes assumptions. That's why you get 3 errors for 1 missing brace.\n\n**PlusPlus-chan says:**\n\"Get used to this. It happens to everyone. The difference between a beginner and a pro is how quickly you spot the missing brace.\""
+    "brokenCode": "fn main() {\n    println(\"Hello, Player!\")  // Missing ! and ;\n    println!(\"Welcome to Rust.\")\n}",
+    "errorMessage": "error[E0423]: expected function, found macro `println`\n --> src/main.rs:2:5\n  |\n2 |     println(\"Hello, Player!\")\n  |     ^^^^^^^ not a function\n\nhelp: use `println!` instead\n  |\n2 |     println!(\"Hello, Player!\")\n  |            +\n\nerror: expected statement after outer attribute\n --> src/main.rs:2:28\n  |\n2 |     println(\"Hello, Player!\")  // Missing ! and ;\n  |                            ^ expected `;`\n\nwarning: this was an expression that is expected to return a value, but it does not\n  |",
+    "explanation": "Two errors in one!\n\n**Error 1:** `println` is a macro, not a function. It needs `!`.\n**Error 2:** Missing semicolon at the end of the statement.\n\n**The fix:**\n```rust\nprintln!(\"Hello, Player!\");  // ← ! and ;\n```\n\n**Rust-chan says:**\n\"The compiler tells you exactly what's wrong. Read the error message. It's not being mean. It's being precise.\""
   },
   "phase3": {
-    "prompt": "Write a C++ program that prints:\n\n```\nWelcome to the Dungeon!\n```\n\nRequirements:\n- Use `#include <iostream>`\n- Use `std::cout`\n- Use `std::endl`\n- The program must compile and run",
+    "prompt": "Write a Rust program that prints:\n\n```\nWelcome to the Rust Arena!\nLet's fight.\n```\n\nRequirements:\n- Use `fn main()`\n- Use `println!()`\n- Each line on its own line\n- Semicolons after each statement",
     "validationPattern": {
-      "required": ["#include <iostream>", "int main", "std::cout", "Welcome to the Dungeon!", "std::endl"],
+      "required": ["fn main", "println!", "Welcome to the Rust Arena!", "Let's fight."],
       "forbidden": ["print", "System.out"],
-      "fullRegex": "#include\\s*<iostream>\\s*int\\s+main\\s*\\(\\s*\\)\\s*\\{[\\s\\S]*std::cout\\s*<<\\s*\"Welcome to the Dungeon!\"\\s*<<\\s*std::endl\\s*;[\\s\\S]*return\\s+0\\s*;[\\s\\S]*\\}"
+      "fullRegex": "fn\\s+main\\s*\\(\\s*\\)\\s*\\{[\\s\\S]*println!\\s*\\(\\s*\"Welcome to the Rust Arena!\"\\s*\\)\\s*;[\\s\\S]*println!\\s*\\(\\s*\"Let's fight.\"\\s*\\)\\s*;[\\s\\S]*\\}"
     },
     "dialogueHints": [
-      "Start with `#include <iostream>`",
-      "Your main function needs `int main()` and `{}`",
-      "`std::cout << \"Your text\" << std::endl;`",
-      "Don't forget `return 0;` at the end"
+      "Start with `fn main() {`",
+      "Each statement ends with a semicolon.",
+      "`println!` is a macro — don't forget the `!`."
     ],
-    "solution": "#include <iostream>\n\nint main() {\n    std::cout << \"Welcome to the Dungeon!\" << std::endl;\n    return 0;\n}",
-    "openingDialogue": "Your turn! Show me you can make the game speak. 🎮"
+    "solution": "fn main() {\n    println!(\"Welcome to the Rust Arena!\");\n    println!(\"Let's fight.\");\n}",
+    "openingDialogue": "Your turn. No mistakes. 🎯"
   },
   "xpReward": 10
 }
