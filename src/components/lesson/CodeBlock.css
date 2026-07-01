@@ -57,3 +57,5 @@
 .token-class-name   { color: #e2c87a; }
 .token-preprocessor { color: #b46eff; font-weight: 600; }
 .token-operator     { color: #ff6e9c; }
+.token-macro        { color: #c792ea; font-weight: 600; }
+.token-lifetime     { color: #5ccfe6; font-style: italic; }

@@ -40,9 +40,9 @@ const localAdapter = {
   },
 
   clear: () => {
-    // Only clear pluspluschan-prefixed keys
+    // Only clear rustchan-prefixed keys
     Object.keys(localStorage)
-      .filter(k => k.startsWith('pluspluschan-'))
+      .filter(k => k.startsWith('rustchan-'))
       .forEach(k => localStorage.removeItem(k));
   },
 };
@@ -75,12 +75,12 @@ const adapter = USE_DATABASE ? apiAdapter : localAdapter;
 // ---- Public API ----
 export const storageService = {
   // User settings (theme, sound on/off etc.)
-  getSettings: () => adapter.get('pluspluschan-settings') || {},
-  saveSettings: (settings) => adapter.set('pluspluschan-settings', settings),
+  getSettings: () => adapter.get('rustchan-settings') || {},
+  saveSettings: (settings) => adapter.set('rustchan-settings', settings),
 
   // Cached lesson data (optional optimization)
-  getCachedLesson: (lessonId) => adapter.get(`pluspluschan-lesson-${lessonId}`),
-  cacheLesson: (lessonId, data) => adapter.set(`pluspluschan-lesson-${lessonId}`, data),
+  getCachedLesson: (lessonId) => adapter.get(`rustchan-lesson-${lessonId}`),
+  cacheLesson: (lessonId, data) => adapter.set(`rustchan-lesson-${lessonId}`, data),
 
   // Generic escape hatch
   get: (key) => adapter.get(key),

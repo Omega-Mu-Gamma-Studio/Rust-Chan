@@ -1,6 +1,6 @@
-# Contributing to PlusPlus-Chan
+# Contributing to Rust-Chan
 
-Thanks for your interest! PlusPlus-Chan is an open-source project from Omega Mu Gamma Studio. Here's how to contribute effectively.
+Thanks for your interest! Rust-Chan is an open-source project from Omega Mu Gamma Studio. Here's how to contribute effectively.
 
 ---
 
@@ -31,8 +31,8 @@ Open an issue before starting on anything in the "Discuss First" category. We'll
 ## Getting Set Up
 
 ```bash
-git clone https://github.com/Omega-Mu-Gamma-Studio/PlusPlus-Chan.git
-cd PlusPlus-Chan
+git clone https://github.com/Omega-Mu-Gamma-Studio/Rust-Chan.git
+cd Rust-Chan
 npm install
 npm run dev
 ```
@@ -59,7 +59,7 @@ Lesson files live at `src/data/lessons/unit{N}/{N}.{M}.json`. The required struc
     {
       "phase": 1,
       "title": "See It Work",
-      "dialogue": "Explanation from PlusPlus-Chan.",
+      "dialogue": "Explanation from Rust-Chan.",
       "code": "// Working C++ code",
       "output": "Expected output"
     },
