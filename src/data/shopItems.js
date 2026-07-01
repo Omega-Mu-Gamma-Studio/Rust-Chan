@@ -85,10 +85,10 @@ export const SHOP_ITEMS = [
     isDefault: true,
   },
   {
-    id: 'outfit-debug-mode',
+    id: 'outfit-casual',
     type: 'outfit',
     name: 'Off-Duty Flannel',
-    requiredLevel: 5,
+    requiredLevel: 3,
     emoji: '🪵',
     accent: '#a0c4ff',
     filter: 'none',
