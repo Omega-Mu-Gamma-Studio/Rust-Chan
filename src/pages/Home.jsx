@@ -24,11 +24,15 @@ const Home = () => {
   useEffect(() => {
     setExpression('idle');
     const greetings = [
-      "You're back. Good. We have work to do.",
-      "Don't keep me waiting.",
-      "Your code won't write itself.",
-      "Ready when you are. ...Actually I've been ready.",
-    ];
+  "You're back. Good. The forge is hot.",
+  "I've been waiting. The borrow checker has been restless.",
+  "Your code is unsafe. Let's fix that.",
+  "The anvil is ready. Are you?",
+  "I can smell the bugs from here.",
+  "You broke something. I can tell.",
+  "I've been watching your code. It's... concerning.",
+  "The forge never sleeps. Neither do I.",
+  ];
     const msg = greetings[Math.floor(Math.random() * greetings.length)];
     setDialogue(msg);
   }, []);
